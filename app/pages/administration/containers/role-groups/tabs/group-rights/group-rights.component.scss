@@ -1,0 +1,54 @@
+:host {
+  display: block;
+  height: 100%;
+}
+.footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.permissions-workspace {
+  position: relative;
+  width: 100%;
+  display: grid;
+  height: calc(100% - 86px);
+  grid-template-columns: 49% 1px auto;
+  grid-template-rows: 100%;
+  overflow: hidden;
+}
+.search-field {
+  margin-bottom: 15px;
+}
+.divider {
+  position: relative;
+  border-right-color: var(--color-black) !important;
+}
+.all-permissions-container {
+  position: absolute;
+  width: calc(100% - 64px);
+  height: calc(100% - 130px);
+  overflow: auto;
+}
+.selected-permissions-container {
+  position: absolute;
+  width: calc(100% - 64px);
+  height: calc(100% - 110px);
+  overflow: auto;
+}
+.header {
+  color: var(--text-white);
+  margin-bottom: 10px;
+}
+.all-permissions,
+.selected-permissions {
+  width: 100%;
+  padding: 32px 32px 0 32px;
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+.permission {
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
+}

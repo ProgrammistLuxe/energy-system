@@ -1,0 +1,57 @@
+<div class="pagination-container">
+  <div class="actions-header">
+    <button
+      mat-flat-button
+      class="darken text-light-blue"
+      (click)="addDiff()">
+      Загрузить diff
+    </button>
+    <div class="compact-form-field-area request-interval-field">
+      <mat-form-field
+        subscriptSizing="dynamic"
+        class="select">
+        <mat-label> Интервал перезапросов </mat-label>
+        <mat-select
+          [value]="intervalValue"
+          (valueChange)="setRequestInterval($event)">
+          <mat-option
+            *ngFor="let option of intervalOptions"
+            [value]="option.time"
+            >{{ option.name }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+      @if(progressValue) {
+      <mat-spinner
+        class="interval-spinner"
+        mode="determinate"
+        [value]="progressValue"
+        diameter="30"></mat-spinner>
+      }
+    </div>
+  </div>
+  <div
+    api-resolver
+    [errorCode]="errorCode"
+    [errorMessage]="errorMessage"
+    [loading]="loading"
+    class="data-container"
+    (reload)="getDiffList()">
+    <div class="pagination-content">
+      <app-diffs-table [diffList]="diffList" />
+    </div>
+  </div>
+  <app-footer class="paginator-footer">
+    <mat-paginator
+      #paginator
+      class="demo-paginator"
+      (page)="handlePageEvent($event)"
+      [length]="length"
+      [pageSize]="pageSize"
+      [pageIndex]="pageIndex"
+      [pageSizeOptions]="[20, 30, 50]"
+      [showFirstLastButtons]="true"
+      aria-label="Select page">
+    </mat-paginator>
+  </app-footer>
+</div>

@@ -1,0 +1,21 @@
+:host {
+  height: 100%;
+  display: block;
+}
+.loading {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.errors {
+  padding: 0 20px;
+  height: 100%;
+}
+.reload {
+  margin-top: 20px;
+}
+.skeleton {
+  height: 100%;
+  width: 100%;
+}

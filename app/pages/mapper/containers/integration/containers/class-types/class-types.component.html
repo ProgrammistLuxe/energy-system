@@ -1,0 +1,47 @@
+<div class="class-types-container">
+  <app-action-panel>
+    <p>Типы данных</p>
+    <button
+      (click)="openEditClassTypeDialog()"
+      mat-flat-button>
+      Добавить тип данных
+    </button>
+  </app-action-panel>
+  <div
+    api-resolver
+    [loading]="loading"
+    [errorCode]="errorCode"
+    [errorMessage]="errorMessage"
+    (reload)="getClassTypeList()"
+    class="class-types-list">
+    <div
+      *displayList="let classType of classTypesList; empty: 'Типы данных не добавлены'"
+      class="class-types-list-item"
+      [class.selected]="selectedClassType?.id === classType.id"
+      (click)="selectClassType(classType)">
+      <p>{{ classType.name }}</p>
+      <div class="actions-block">
+        <button
+          mat-icon-button
+          matIconButtonCustom
+          matTooltip="Редактировать"
+          [width]="28"
+          [height]="28"
+          [iconsSize]="20"
+          (click)="$event.stopPropagation(); openEditClassTypeDialog(classType)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          matIconButtonCustom
+          matTooltip="Удалить"
+          [width]="28"
+          [height]="28"
+          [iconsSize]="20"
+          (click)="$event.stopPropagation(); deleteClassType(classType)">
+          <mat-icon>delete_forever</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

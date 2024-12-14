@@ -1,0 +1,43 @@
+<div class="schema-container">
+  <div class="schema-content">
+    @if(!loading) { @if(currentBase64) {
+    <button
+      class="toggle-button"
+      mat-flat-button
+      (click)="toggleFullScreen()">
+      На весь экран
+    </button>
+    <div class="image-container">
+      <img
+        [src]="currentBase64"
+        class="image"
+        alt="Схема" />
+    </div>
+    } @else {
+    <app-empty-template>
+      <p>Схема отсутсвует</p>
+      <mat-icon class="material-symbols-outlined">error</mat-icon>
+    </app-empty-template>
+    } }
+    <app-loading [loading]="loading" />
+  </div>
+  <mat-divider
+    vertical
+    class="divider"></mat-divider>
+  <div class="schemas-list">
+    @if(!listLoading) {
+    <div
+      *displayList="let schema of schemasList; empty: 'Список пуст'"
+      class="schema"
+      [class.active]="selectedSchema?.uid === schema.uid"
+      (click)="selectSchema(schema)">
+      <p
+        [overflowTooltip]="schema.name"
+        class="schema-name">
+        {{ schema.name }}
+      </p>
+    </div>
+    }
+    <app-loading [loading]="listLoading" />
+  </div>
+</div>

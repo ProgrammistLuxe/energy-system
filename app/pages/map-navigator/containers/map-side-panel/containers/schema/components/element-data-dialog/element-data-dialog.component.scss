@@ -1,0 +1,18 @@
+.attrs-form {
+  background-color: var(--side-panel-bg);
+}
+.button-block {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+.dialog-content-wrapper {
+  max-height: 500px;
+  overflow: auto;
+}
+.mat-mdc-form-field {
+  width: 100%;
+}

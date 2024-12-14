@@ -1,0 +1,184 @@
+<div class="table-container">
+  <div
+    [class.hide]="loading"
+    api-resolver
+    [errorCode]="errorCode"
+    [errorMessage]="errorMessage"
+    [loading]="loading"
+    (reload)="getData()">
+    <ng-container *ngIf="dataSource.data?.length > 0; else listEmpty">
+      <ng-container>
+        <table
+          class="table"
+          [class.hide]="loading"
+          mat-table
+          matSort
+          [dataSource]="dataSource"
+          [matSortActive]="order.column"
+          [matSortDirection]="order.direction"
+          (matSortChange)="sortEvent($event)">
+          <ng-container matColumnDef="last_name">
+            <th
+              *matHeaderCellDef
+              mat-header-cell
+              mat-sort-header="last_name">
+              Фамилия
+            </th>
+            <td
+              *matCellDef="let element"
+              mat-cell>
+              {{ element.last_name | default }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="first_name">
+            <th
+              *matHeaderCellDef
+              mat-header-cell
+              mat-sort-header="first_name">
+              Имя
+            </th>
+            <td
+              *matCellDef="let element"
+              mat-cell>
+              {{ element.first_name | default }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="middle_name">
+            <th
+              *matHeaderCellDef
+              mat-header-cell
+              mat-sort-header="middle_name">
+              Отчество
+            </th>
+            <td
+              *matCellDef="let element"
+              mat-cell>
+              {{ element.middle_name | default }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="role">
+            <th
+              *matHeaderCellDef
+              mat-header-cell
+              mat-sort-header="role">
+              Роль
+            </th>
+            <td
+              *matCellDef="let element"
+              mat-cell>
+              <ng-container *ngFor="let group of element.groups">
+                <p class="role">
+                  {{ group.name | default }}
+                </p>
+              </ng-container>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="job_title">
+            <th
+              *matHeaderCellDef
+              mat-header-cell
+              mat-sort-header="job_title">
+              Должность
+            </th>
+            <td
+              *matCellDef="let element"
+              mat-cell>
+              {{ element.job_title | default }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="department">
+            <th
+              *matHeaderCellDef
+              mat-header-cell
+              mat-sort-header="department">
+              Структурное подразделение
+            </th>
+            <td
+              *matCellDef="let element"
+              mat-cell>
+              {{ element.department | default }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="phone">
+            <th
+              *matHeaderCellDef
+              mat-header-cell
+              mat-sort-header="phone">
+              Телефон
+            </th>
+            <td
+              *matCellDef="let element"
+              mat-cell>
+              {{ element.phone | default }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="username">
+            <th
+              *matHeaderCellDef
+              mat-header-cell
+              mat-sort-header="username">
+              Корп.почта
+            </th>
+            <td
+              *matCellDef="let element"
+              mat-cell>
+              {{ element.username | default }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="is_active">
+            <th
+              *matHeaderCellDef
+              mat-header-cell
+              mat-sort-header="is_active">
+              Активен
+            </th>
+            <td
+              *matCellDef="let element"
+              mat-cell>
+              <div class="status">
+                <mat-icon
+                  class="status-icon"
+                  [class.icon-disabled]="!element.is_active"
+                  >check_circle</mat-icon
+                >
+                {{ element.is_active ? 'активен' : 'не активен' }}
+              </div>
+            </td>
+          </ng-container>
+
+          <tr
+            *matHeaderRowDef="columns; sticky: true"
+            mat-header-row></tr>
+          <tr
+            *matRowDef="let row; columns: columns"
+            mat-row
+            [class.selected]="selectedRowId === row.id"
+            (click)="this.selectedRowId = row.id"
+            (dblclick)="openEmployee(row.id)"></tr>
+        </table>
+      </ng-container>
+    </ng-container>
+    <ng-template #listEmpty>
+      <app-empty-template>
+        <p>Список пуст</p>
+      </app-empty-template>
+    </ng-template>
+  </div>
+  <app-loading [loading]="loading"></app-loading>
+
+  <!-- TODO add no-response-handler -->
+  <ng-template #noResponseTemplate>
+    <app-empty-template>
+      <mat-icon fontSize="material-icons-outlined">info</mat-icon>
+      <p>Данные не получены</p>
+    </app-empty-template>
+  </ng-template>
+</div>

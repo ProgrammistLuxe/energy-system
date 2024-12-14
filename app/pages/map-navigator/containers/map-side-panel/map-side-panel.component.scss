@@ -1,0 +1,70 @@
+.sidenav-container {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  right: 0;
+  z-index: 800;
+}
+.sidenav {
+  height: 100%;
+  width: 820px;
+  padding: 15px;
+  background-color: var(--table-bg-dark);
+  overflow: auto;
+}
+.drawer-content {
+  position: relative;
+  height: calc(100% - 90px);
+  width: 100%;
+}
+.close-sidenav-btn {
+  display: block;
+  margin-right: 0;
+  margin-left: auto;
+}
+.toggle-sidenav {
+  width: 30px;
+  height: 30px;
+  padding: 5px;
+  position: absolute;
+  cursor: pointer;
+  right: 0;
+  top: 0;
+  background-color: var(--side-panel-bg);
+  z-index: 790;
+  &.loading {
+    cursor: wait;
+    pointer-events: none;
+  }
+}
+.title {
+  margin-bottom: 0;
+}
+.loading {
+  cursor: wait;
+  .sidenav {
+    pointer-events: none;
+  }
+}
+.tabs-list {
+  height: 45px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+:host ::ng-deep {
+  .chip {
+    background-color: var(--chip-bg) !important;
+    .mat-mdc-chip-action {
+      padding-left: 12px !important;
+    }
+    .mat-mdc-chip-graphic {
+      display: none;
+    }
+  }
+  .mat-mdc-chip-selected {
+    background-color: var(--light-blue-bg) !important;
+  }
+}

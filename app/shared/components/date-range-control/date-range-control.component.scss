@@ -1,0 +1,88 @@
+:host {
+  cursor: pointer;
+  display: inline-block;
+  width: 100%;
+  outline: none;
+  margin-top: -0.0625em;
+  color: var(--text-primary);
+}
+
+.date-time-range-control-container {
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: 1.1em;
+}
+
+::ng-deep {
+  .date-time-picker-menu {
+    background: var(--dark-gray) !important;
+    max-width: none !important;
+    margin-top: 8px;
+  }
+}
+
+.interval {
+  margin: 15px 10px;
+
+  .interval-container {
+    padding: 0 20px 20px 20px;
+    background: var(--layer);
+  }
+}
+
+.control-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 7px;
+  margin-right: 20px;
+  gap: 10px;
+}
+
+.time-input {
+  width: 45px;
+  border: 1px solid var(--text-secondary);
+  background: unset;
+  padding: 10px;
+  border-radius: 6px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.time-input:focus {
+  border: 1px solid var(--text-secondary);
+}
+
+.time-container {
+  span {
+    padding: 6px;
+  }
+}
+
+.date-time-range-control-container.disabled {
+  color: var(--text-disabled);
+  pointer-events: none;
+}
+
+.menu-container {
+  padding: 0 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  align-content: center;
+}
+
+.mat-calendar {
+  width: 260px;
+  height: 320px;
+}
+
+.mat-mdc-input-element {
+  text-align: center;
+}
+
+.menu-date-time-label {
+  padding: 0 6px;
+  margin-bottom: 10px;
+}

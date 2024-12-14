@@ -1,0 +1,68 @@
+.table-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  padding-bottom: 3px;
+}
+.link {
+  cursor: pointer;
+}
+.table {
+  height: fit-content;
+  background-color: inherit;
+  th {
+    font-family: Inter, sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    color: var(--table-head-text);
+    background-color: var(--table-head-background);
+  }
+  td {
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    color: var(--text-color);
+    background-color: var(--layer);
+    height: 36px;
+  }
+  th.mat-mdc-header-cell,
+  td.mat-mdc-cell {
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  th,
+  td {
+    border-bottom: 1px solid var(--divider) !important;
+  }
+}
+.mat-column-description {
+  max-width: 230px;
+}
+
+.mat-column-date_created,
+.mat-column-date_updated {
+  min-width: 200px;
+  max-width: 250px;
+}
+.mat-column-id {
+  box-shadow: 2px 0px 0px 0px var(--border-shadow);
+  max-width: 100px;
+}
+.text {
+  width: 100%;
+  text-wrap: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 0;
+}
+tr.error td {
+  color: var(--error);
+}
+tr.waiting td {
+  color: var(--waiting);
+}

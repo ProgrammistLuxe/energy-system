@@ -1,0 +1,23 @@
+<div class="main-container">
+  <as-split
+    direction="horizontal"
+    unit="pixel">
+    <as-split-area
+      [minSize]="200"
+      [size]="300"
+      [maxSize]="680">
+      <div class="tree">
+        <app-passports-tree />
+      </div>
+    </as-split-area>
+    <as-split-area>
+      <div class="work-space">
+        @switch (mapVersion) { @case (1) {
+        <app-map />
+        } @case (2) {
+        <app-map-v2 />
+        } }
+      </div>
+    </as-split-area>
+  </as-split>
+</div>

@@ -1,0 +1,10 @@
+<div class="breadcrumbs-container">
+  @if (showButton) {
+  <button
+    mat-icon-button
+    (click)="goBack()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  }
+  <h4 class="header">{{ name | firstLetterUppercase }}</h4>
+</div>

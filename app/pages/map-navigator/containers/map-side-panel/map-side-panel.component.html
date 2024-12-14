@@ -1,0 +1,74 @@
+@if(selectedUid && panelState && !drawer.opened) {
+<div
+  class="toggle-sidenav"
+  matTooltip="Открыть боковую область"
+  [class.loading]="treeExpanding"
+  (click)="drawer.open()">
+  <mat-icon class="material-symbols-outlined">menu_open</mat-icon>
+</div>
+}
+<mat-drawer-container
+  class="sidenav-container"
+  [class.loading]="treeExpanding"
+  autosize>
+  <mat-drawer
+    #drawer
+    position="end"
+    class="sidenav"
+    mode="side">
+    <button
+      class="close-sidenav-btn"
+      mat-icon-button
+      matIconButtonCustom
+      [width]="30"
+      [height]="30"
+      [iconsSize]="20"
+      matTooltip="Закрыть боковую область"
+      (click)="drawer.close()">
+      <mat-icon>close</mat-icon>
+    </button>
+    <mat-chip-listbox class="tabs-list">
+      <mat-chip-option
+        #passport
+        value="passport"
+        [selected]="panelState === 'passport'"
+        [selectable]="!passport.selected"
+        (selectionChange)="setChipSelection($event)"
+        class="chip"
+        >Паспорт</mat-chip-option
+      >
+      <mat-chip-option
+        #schema
+        value="schema"
+        [selected]="panelState === 'schema'"
+        [selectable]="!schema.selected"
+        (selectionChange)="setChipSelection($event)"
+        class="chip"
+        >Схема</mat-chip-option
+      >
+      <mat-chip-option
+        #schema_png
+        value="schema_png"
+        [selected]="panelState === 'schema_png'"
+        [selectable]="!schema_png.selected"
+        (selectionChange)="setChipSelection($event)"
+        class="chip"
+        >Схема png</mat-chip-option
+      >
+    </mat-chip-listbox>
+
+    <div class="drawer-content">
+      @switch (panelState) { @case ('passport') {
+      <app-passport-view />
+      } @case ('schema') {
+      <app-schema />
+      } @case ('schema_png') {
+      <app-schema-png />
+      } @default {
+      <app-empty-template>
+        <p>Не выбрано ни одного объекта</p>
+      </app-empty-template>
+      } }
+    </div>
+  </mat-drawer>
+</mat-drawer-container>

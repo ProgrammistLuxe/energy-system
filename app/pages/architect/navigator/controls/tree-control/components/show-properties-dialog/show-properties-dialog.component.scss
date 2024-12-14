@@ -1,0 +1,26 @@
+.links-container {
+  background-color: var(--side-panel-bg);
+  padding: 0 15px 15px 15px;
+}
+.dialog-content-wrapper {
+  display: flex;
+  max-height: 250px;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 4px;
+  background-color: var(--dark-gray);
+  padding: 10px;
+  overflow-y: auto;
+}
+.link-block {
+  display: flex;
+  height: 20px;
+  width: fit-content;
+}
+.attr-link {
+  height: 100%;
+  width: max-content;
+  color: var(--text-color);
+  text-decoration: underline;
+  cursor: pointer;
+}

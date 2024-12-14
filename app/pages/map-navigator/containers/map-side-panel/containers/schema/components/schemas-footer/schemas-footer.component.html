@@ -1,0 +1,36 @@
+<div class="footer">
+  <button
+    mat-icon-button
+    matIconButtonCustom
+    [width]="26"
+    [height]="26"
+    [iconsSize]="22"
+    class="toggle-screen"
+    [matTooltip]="fullScreen ? 'Свернуть' : 'На весь экран'"
+    (click)="fullScreenToggle.emit()">
+    <mat-icon class="material-icons-outlined">{{ fullScreen ? 'fullscreen_exit' : 'fullscreen' }}</mat-icon>
+  </button>
+  <button
+    mat-icon-button
+    matIconButtonCustom
+    [disabled]="+scale.toFixed(1) === minScale"
+    [width]="24"
+    [height]="24"
+    [iconsSize]="20"
+    matTooltip="Уменьшить масштаб"
+    (click)="zoomOut()">
+    <mat-icon>zoom_out</mat-icon>
+  </button>
+  <span class="scale">{{ scale * 100 | number: '0.0' }}%</span>
+  <button
+    mat-icon-button
+    matIconButtonCustom
+    [disabled]="+scale.toFixed(1) === maxScale"
+    [width]="26"
+    [height]="26"
+    [iconsSize]="22"
+    matTooltip="Увеличить масштаб"
+    (click)="zoomIn()">
+    <mat-icon>zoom_in</mat-icon>
+  </button>
+</div>

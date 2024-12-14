@@ -1,0 +1,68 @@
+<div class="menu">
+  <div class="left-menu">
+    <div
+      class="div-button-light"
+      (click)="createEmployee()">
+      <mat-icon>add</mat-icon>
+      Добавить
+    </div>
+
+    <app-search-field
+      class="search-field"
+      [initialSearchString]="search$ | async"
+      (search)="search$.next($event)" />
+
+    <div
+      [matMenuTriggerFor]="menu1"
+      #optionSelectTrigger="matMenuTrigger"
+      class="header-account">
+      <div class="div-button-grey">
+        Роль
+        <mat-icon>expand_more</mat-icon>
+      </div>
+      <mat-menu #menu1="matMenu">
+        <button mat-menu-item>
+          <span>Пункт меню</span>
+        </button>
+        <button mat-menu-item>
+          <span>Пункт меню</span>
+        </button>
+      </mat-menu>
+    </div>
+
+    <div
+      [matMenuTriggerFor]="menu2"
+      #optionSelectTrigger="matMenuTrigger"
+      class="header-account">
+      <div class="div-button-grey">
+        Подразделение
+        <mat-icon>expand_more</mat-icon>
+      </div>
+      <mat-menu #menu2="matMenu">
+        <button mat-menu-item>
+          <mat-icon>help</mat-icon>
+          <span>Пункт меню</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>edit</mat-icon>
+          <span>Пункт меню</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+
+  <div class="right-menu">
+    <div class="div-button-grey-blue">
+      <mat-icon class="material-symbols-outlined">print</mat-icon>
+      Печать
+    </div>
+    <div class="div-button-grey-blue">
+      <mat-icon class="material-symbols-outlined">ios_share</mat-icon>
+      Экспорт
+    </div>
+    <div class="div-button-grey-blue">
+      <mat-icon class="material-symbols-outlined">table_view</mat-icon>
+      Копировать в Excel
+    </div>
+  </div>
+</div>

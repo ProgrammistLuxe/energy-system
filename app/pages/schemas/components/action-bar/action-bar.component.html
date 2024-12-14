@@ -1,0 +1,41 @@
+<div class="panel-tool">
+  <button
+    mat-flat-button
+    class="darken text-light-blue"
+    (click)="drawJsonLd.emit()">
+    Рисовать по jsonLd
+  </button>
+  <button
+    mat-flat-button
+    class="select-button darken icon text-light-blue"
+    [matMenuTriggerFor]="menuController">
+    <div class="select-button-content">Экспорт <mat-icon class="material-symbols-outlined"> expand_more</mat-icon></div>
+  </button>
+  <mat-menu
+    class="context-menu"
+    #menuController="matMenu"
+    xPosition="before">
+    <button
+      mat-menu-item
+      (click)="exportPng.emit()">
+      <span>PNG</span>
+    </button>
+    <button
+      mat-menu-item
+      (click)="exportPdf.emit()">
+      <span>PDF</span>
+    </button>
+    <button
+      mat-menu-item
+      (click)="exportSvg.emit()">
+      <span>SVG</span>
+    </button>
+  </mat-menu>
+  <button
+    mat-flat-button
+    class="darken clear-workspace-btn icon-text"
+    (click)="clearGraph.emit()">
+    <mat-icon class="material-symbols-outlined">cancel</mat-icon>
+    Очистить рабочую область
+  </button>
+</div>

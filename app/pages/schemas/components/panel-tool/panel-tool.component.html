@@ -1,0 +1,15 @@
+<div class="elements">
+  <button
+    mat-button
+    class="reset-selected"
+    (click)="resetSelectedElement()">
+    Сбросить выбор
+  </button>
+  <div
+    *ngFor="let element of elements"
+    class="element"
+    [class.active]="selectedElement?.id === element.id"
+    (click)="selectElement(element)">
+    <p class="element-name">{{ element.name }}</p>
+  </div>
+</div>

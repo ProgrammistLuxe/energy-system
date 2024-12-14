@@ -1,0 +1,20 @@
+.context-menu.mat-mdc-menu-panel {
+  background-color: var(--dark-gray);
+  border-radius: 8px;
+  .mat-mdc-menu-item {
+    color: var(--light-blue-bg-lighten);
+    .mat-icon {
+      color: var(--light-blue-bg-lighten) !important;
+    }
+    &:hover {
+      background-color: var(--light-blue-bg) !important;
+      color: var(--text-white);
+      .mat-icon {
+        color: var(--text-white) !important;
+      }
+    }
+    &:not(:last-child) {
+      border-bottom: 1px solid var(--color-black);
+    }
+  }
+}

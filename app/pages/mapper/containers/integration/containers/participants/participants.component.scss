@@ -1,0 +1,28 @@
+.participants-container {
+  width: 100%;
+  height: 100%;
+}
+.participants-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 700px;
+  height: 40px;
+  padding: 0 16px;
+  &:not(:last-child) {
+    margin-bottom: 8px;
+  }
+  .actions-block {
+    display: flex;
+    gap: 10px;
+    width: fit-content;
+  }
+}
+.participants-list {
+  position: relative;
+  height: calc(100% - 64px);
+  width: 100%;
+  overflow: auto;
+  padding: 8px 24px;
+}

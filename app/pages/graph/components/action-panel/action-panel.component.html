@@ -1,0 +1,36 @@
+<div class="action-panel">
+  <mat-select
+    class="mode-select"
+    value="default"
+    (valueChange)="onModeChanged.emit($event)">
+    <mat-option value="default">Перетягивание элементов графа</mat-option>
+    <mat-option value="addNode">Добавление элементов</mat-option>
+    <mat-option value="addEdge">Добавление связей</mat-option>
+  </mat-select>
+  <div class="history">
+    @if(!history.length) {
+    <button
+      mat-flat-button
+      class="load-graph"
+      (click)="loadGraph.emit()">
+      Загрузить начальный граф
+    </button>
+    } @else {
+    <mat-chip-listbox>
+      @for (item of history; track item) {
+      <mat-chip
+        class="chip"
+        (removed)="onItemDeleted.emit(item)"
+        (click)="onItemSelected.emit(item)">
+        <p
+          [overflowTooltip]="item.name"
+          class="chip-content">
+          {{ item.name }}
+        </p>
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+      }
+    </mat-chip-listbox>
+    }
+  </div>
+</div>

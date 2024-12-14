@@ -1,0 +1,73 @@
+<div class="role-groups">
+  <app-work-area-side-panel>
+    <div class="action-panel">
+      <div
+        appAddButton
+        (click)="addGroup()"></div>
+      <app-search-field (search)="onSearchValueChanged($event)" />
+    </div>
+    <div
+      api-resolver
+      [errorCode]="errorCode"
+      [errorMessage]="errorMessage"
+      [loading]="loading"
+      (reload)="getAuthGroups()"
+      class="role-group-list">
+      <ng-container *ngIf="searchedRoleGroupList.length; else emptyList">
+        <a
+          *ngFor="let group of searchedRoleGroupList"
+          class="group"
+          [routerLink]="group.id.toString()"
+          routerLinkActive="active">
+          <p
+            [overflowTooltip]="group.name"
+            class="group-name">
+            {{ group.name }}
+          </p>
+          <button
+            mat-icon-button
+            matIconButtonCustom
+            [width]="30"
+            [height]="30"
+            [iconsSize]="20"
+            [matMenuTriggerFor]="menuController"
+            (click)="$event.preventDefault(); $event.stopPropagation()">
+            <mat-icon> more_vert</mat-icon>
+          </button>
+          <mat-menu
+            class="context-menu"
+            #menuController="matMenu"
+            xPosition="before">
+            <button
+              mat-menu-item
+              [disableRipple]="true"
+              (click)="editGroup(group)">
+              <mat-icon>edit</mat-icon>
+              <span>Редактировать</span>
+            </button>
+            <button
+              mat-menu-item
+              (click)="copyGroup(group)">
+              <mat-icon class="material-symbols-outlined"> content_copy </mat-icon>
+              <span>Копировать</span>
+            </button>
+            <button
+              mat-menu-item
+              (click)="deleteGroup(group)">
+              <mat-icon>delete_forever</mat-icon>
+              <span>Удалить</span>
+            </button>
+          </mat-menu>
+        </a>
+      </ng-container>
+      <ng-template #emptyList>
+        <app-empty-template>
+          <p>Список групп пуст</p>
+        </app-empty-template>
+      </ng-template>
+    </div>
+  </app-work-area-side-panel>
+  <div class="role-groups-container">
+    <router-outlet></router-outlet>
+  </div>
+</div>

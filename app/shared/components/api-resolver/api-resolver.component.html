@@ -1,0 +1,60 @@
+<ng-container *ngIf="!loading; else loadingTemplate">
+  <ng-container *ngIf="!hasError; else errorTemplate">
+    <ng-content></ng-content>
+  </ng-container>
+</ng-container>
+
+<ng-template #errorTemplate>
+  <ng-container [ngSwitch]="errorCode">
+    <div class="errors">
+      <!-- ФИЧА ОТКЛЮЧЕНА -->
+      <app-empty-template
+        *ngSwitchCase="-200"
+        class="container">
+      </app-empty-template>
+      <!-- ЗАПРОС НЕ УШЕЛ -->
+      <app-empty-template
+        *ngSwitchCase="0"
+        class="container">
+        <mat-icon>error</mat-icon>
+        <p>
+          {{ errorMessage || 'Не удалось отправить запрос' }}
+        </p>
+        <button
+          class="reload-button"
+          mat-flat-button
+          (click)="reload.emit(true)">
+          Обновить
+        </button>
+      </app-empty-template>
+      <!-- ДЕФОЛТ -->
+      <app-empty-template
+        *ngSwitchDefault
+        class="container">
+        <mat-icon>error</mat-icon>
+        <p>
+          {{ errorMessage || 'Запрос завершился с ошибкой' }}
+        </p>
+        <button
+          mat-flat-button
+          (click)="reload.emit(true)">
+          Обновить
+        </button>
+      </app-empty-template>
+    </div>
+  </ng-container>
+</ng-template>
+
+<ng-template #loadingTemplate>
+  <div class="container loading">
+    @if(isSkeleton) {
+    <ngx-skeleton-loader
+      class="skeleton"
+      [count]="count || 50"
+      [theme]="{ height: '14px', width: '100%', display: 'block', 'background-color': 'var(--skeleton-bg)' }"
+      animation="progress" />
+    } @else {
+    <mat-spinner diameter="50"></mat-spinner>
+    }
+  </div>
+</ng-template>

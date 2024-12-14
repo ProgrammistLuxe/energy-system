@@ -1,0 +1,11 @@
+.mat-mdc-snack-bar-label {
+  padding: 0 !important;
+}
+.mdc-snackbar__surface {
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: 380px !important;
+  border-radius: 16px !important;
+  padding: 0 !important;
+  z-index: 2000;
+}

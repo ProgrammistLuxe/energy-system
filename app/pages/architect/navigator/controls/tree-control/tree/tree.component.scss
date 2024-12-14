@@ -1,0 +1,95 @@
+:host {
+  display: block;
+  height: 100%;
+}
+.tree-container {
+  height: 100%;
+  width: 100%;
+  padding: 15px;
+  position: relative;
+  background-color: var(--dark-gray);
+  z-index: 15;
+  &.expanding {
+    cursor: wait;
+  }
+}
+.action-panel {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.search {
+  display: block;
+  width: 100%;
+  margin-bottom: 15px;
+}
+.tree {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+}
+.expanding {
+  .action-panel,
+  .tree {
+    pointer-events: none;
+  }
+}
+.icon {
+  color: var(--text-white);
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+}
+.expand-icon {
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+  color: var(--expand-icon-color);
+}
+.title {
+  margin-bottom: 0;
+  max-width: 100%;
+  overflow: hidden;
+  text-wrap: nowrap;
+  text-overflow: ellipsis;
+}
+.selected {
+  color: var(--text-color-light-blue-lighten);
+}
+.node-section {
+  max-width: calc(100% - 10px);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.toggle-section {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+.tree-node {
+  width: 100%;
+  min-height: 0;
+  height: 32px;
+  justify-content: space-between;
+  background-color: var(--dark-gray);
+  &.selected {
+    background-color: var(--element-active-bg);
+  }
+}
+.tree-node:not(.selectable) {
+  .title {
+    color: var(--text-color-dark);
+  }
+}
+.tree-node.selectable {
+  &:hover {
+    background-color: var(--tree-node-hover);
+    cursor: pointer;
+  }
+}
+.hidden {
+  pointer-events: none;
+  opacity: 0;
+}

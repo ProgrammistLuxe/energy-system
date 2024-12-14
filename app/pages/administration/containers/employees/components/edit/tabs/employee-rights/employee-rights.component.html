@@ -1,0 +1,35 @@
+<div
+  [class.hide]="loading"
+  class="container">
+  <div class="rights-selected">
+    <h3>Выбранные группы прав</h3>
+    <ng-container *ngFor="let item of selectedRightsGroups">
+      <app-list-item-remove
+        [name]="item.name"
+        (clicked)="removeGroup(item)"></app-list-item-remove>
+    </ng-container>
+  </div>
+  <mat-divider [vertical]="true"></mat-divider>
+  <div class="rights-all">
+    <h3>Все группы прав</h3>
+    <ng-container *ngFor="let item of allRightsGroupsFiltered">
+      <app-list-item-add
+        [name]="item.name"
+        (clicked)="addGroup(item)"></app-list-item-add>
+    </ng-container>
+  </div>
+</div>
+<app-footer class="footer">
+  <button
+    mat-flat-button
+    [buttonLoading]="saveLoading"
+    (click)="save()">
+    Сохранить
+  </button>
+  <button
+    mat-button
+    (click)="back()">
+    Отменить
+  </button>
+</app-footer>
+<app-loading [loading]="loading"></app-loading>

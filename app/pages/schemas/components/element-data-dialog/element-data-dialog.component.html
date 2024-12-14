@@ -1,0 +1,37 @@
+<div
+  class="attrs-form"
+  [formGroup]="form">
+  @if(!loading) { @if(formData) {
+  <div class="dialog-content-wrapper compact-form-field-area">
+    @for(control of controlList; track control;) {
+    <mat-form-field>
+      <mat-label>{{ formData[control].label }}</mat-label>
+      <input
+        [formControlName]="control"
+        matInput
+        [type]="formData[control].type" />
+      <mat-error mat-error-ext></mat-error>
+    </mat-form-field>
+    }
+  </div>
+  <div class="button-block">
+    <button
+      mat-flat-button
+      [buttonLoading]="saveLoading"
+      [disabled]="saveLoading || isTheSame || form.invalid || loading"
+      (click)="saveDiff()">
+      Обновить
+    </button>
+    <button
+      mat-button
+      [mat-dialog-close]="false">
+      Отменить
+    </button>
+  </div>
+  } @else {
+  <app-empty-template>
+    <p>Нет полей для редактирования</p>
+  </app-empty-template>
+  } }
+  <app-loading [loading]="loading" />
+</div>

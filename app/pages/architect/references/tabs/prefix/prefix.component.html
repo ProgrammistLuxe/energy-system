@@ -1,0 +1,127 @@
+<div
+  class="work-space"
+  api-resolver
+  [errorCode]="errorCode"
+  [errorMessage]="errorMessage"
+  [loading]="loading"
+  (reload)="getData()">
+  <div class="search-field">
+    <div
+      appAddButton
+      matTooltip="Добавить префикс"
+      (click)="addItem()"></div>
+    <app-search-field
+      (search)="searchData($event)"
+      [fieldsToSearch]="'all'"></app-search-field>
+  </div>
+  <div class="table-container">
+    <ng-container *ngIf="dataSource.data?.length > 0; else listEmpty">
+      <ng-container>
+        <table
+          class="table"
+          mat-table
+          matSort
+          (matSortChange)="dataSource.sort = sort"
+          [dataSource]="dataSource">
+          <ng-container matColumnDef="id">
+            <th
+              *matHeaderCellDef
+              mat-header-cell
+              mat-sort-header>
+              ID
+            </th>
+            <td
+              *matCellDef="let element"
+              mat-cell>
+              {{ element.id | default }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="full_name">
+            <th
+              *matHeaderCellDef
+              mat-header-cell
+              mat-sort-header>
+              Полное название
+            </th>
+            <td
+              *matCellDef="let element"
+              mat-cell>
+              {{ element.full_name | default }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="short_name">
+            <th
+              *matHeaderCellDef
+              mat-header-cell
+              mat-sort-header>
+              Сокращенное название
+            </th>
+            <td
+              *matCellDef="let element"
+              mat-cell>
+              {{ element.short_name | default }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="description">
+            <th
+              *matHeaderCellDef
+              mat-header-cell>
+              Описание
+            </th>
+            <td
+              *matCellDef="let element"
+              mat-cell>
+              {{ element.description | default }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="actions">
+            <th
+              *matHeaderCellDef
+              mat-header-cell></th>
+            <td
+              *matCellDef="let element"
+              mat-cell>
+              <div class="actions-container">
+                <button
+                  mat-icon-button
+                  matIconButtonCustom
+                  [width]="30"
+                  [height]="30"
+                  [iconsSize]="20"
+                  matTooltip="Редактировать элемент"
+                  (click)="editItem(element)">
+                  <mat-icon> edit</mat-icon>
+                </button>
+                <button
+                  mat-icon-button
+                  matIconButtonCustom
+                  [width]="30"
+                  [height]="30"
+                  [iconsSize]="20"
+                  matTooltip="Удалить элемент"
+                  (click)="deleteItem(element)">
+                  <mat-icon> delete_forever</mat-icon>
+                </button>
+              </div>
+            </td>
+          </ng-container>
+          <tr
+            *matHeaderRowDef="columns; sticky: true"
+            mat-header-row
+            class="table-head"></tr>
+          <tr
+            *matRowDef="let row; columns: columns"
+            mat-row
+            class="table-row"></tr>
+        </table>
+      </ng-container>
+    </ng-container>
+    <ng-template #listEmpty>
+      <app-empty-template>
+        <p>Список пуст</p>
+      </app-empty-template>
+    </ng-template>
+  </div>
+</div>

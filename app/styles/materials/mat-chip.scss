@@ -1,0 +1,20 @@
+.mat-mdc-chip {
+  background-color: var(--chip-bg) !important;
+
+  .mat-mdc-chip-action {
+    padding-left: 12px !important;
+  }
+
+  .mat-mdc-chip-graphic {
+    display: none;
+  }
+}
+
+.mat-mdc-chip-selected {
+  background-color: var(--light-blue-bg) !important;
+}
+
+.mat-mdc-chip-selected.cdk-focused .mat-mdc-chip-focus-overlay,
+.mat-mdc-chip-highlighted.cdk-focused .mat-mdc-chip-focus-overlay {
+  background-color: inherit !important;
+}

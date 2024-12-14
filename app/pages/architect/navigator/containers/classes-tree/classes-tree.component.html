@@ -1,0 +1,109 @@
+<div class="container">
+  <div class="menu compact-form-field-area">
+    <mat-form-field
+      class="class-field"
+      appearance="outline"
+      subscriptSizing="dynamic">
+      <mat-label>Выберите класс</mat-label>
+      <mat-select [formControl]="classControl">
+        @if(loading) {
+        <mat-option disabled><mat-spinner [diameter]="20"></mat-spinner> </mat-option>
+        } @else {@if( (classList$ | async).length) {
+        <div class="select-search">
+          <app-search-field (search)="searchClass($event)"></app-search-field>
+        </div>
+        <div class="options-container">
+          @if( (searchedClassList$ | async).length) { @for(item of searchedClassList$| async; track item) {
+          <mat-option [value]="item.class_name">{{ item.class_name | cutPrefix }}</mat-option>
+          } } @else {
+          <mat-option
+            disabled
+            [value]=""
+            >Список пуст</mat-option
+          >
+          }
+        </div>
+        } @else {
+        <mat-option
+          disabled
+          [value]=""
+          >Список пуст</mat-option
+        >
+        } }
+      </mat-select>
+      <mat-error mat-error-ext></mat-error>
+    </mat-form-field>
+  </div>
+  <div class="instance-container">
+    @if(classControl.value) {
+    <div class="action-header">
+      <div
+        matTooltip="Создать элемент"
+        appAddButton
+        (click)="openCreateEntityDialog()"></div>
+      <app-search-field
+        [initialSearchString]="searchValue"
+        (search)="onSearch($event)" />
+    </div>
+    <div
+      api-resolver
+      [errorCode]="errorCode"
+      [errorMessage]="errorMessage"
+      [loading]="loading"
+      [isSkeleton]="true"
+      class="instance-list-content"
+      (reload)="getClassInstances()">
+      @if(instanceList.length){
+      <div
+        [appCheckScroll]
+        class="instance-list">
+        @for( item of instanceList; track item) {
+        <div
+          class="instance"
+          [class.selected]="item.uid === selectedNode?.uid"
+          [overflowTooltip]="item.name || ''"
+          (click)="goToObject(item)">
+          {{ item.name | default }}
+          <button
+            mat-icon-button
+            matIconButtonCustom
+            [isIconButton]="true"
+            [buttonLoading]="saveLoading"
+            [width]="24"
+            [height]="24"
+            [iconsSize]="20"
+            matTooltip="Удалить элемент"
+            (click)="openDeleteElementDialog(item); $event.stopPropagation()">
+            <mat-icon class="delete-icon"> delete_forever </mat-icon>
+          </button>
+        </div>
+        }
+      </div>
+
+      } @else {
+      <app-empty-template>
+        <p>Нет элементов</p>
+      </app-empty-template>
+      }
+    </div>
+    <app-footer class="paginator-footer">
+      <mat-paginator
+        #paginator
+        class="paginator-small"
+        (page)="handlePageEvent($event)"
+        [length]="length"
+        [pageSize]="pageSize"
+        [pageIndex]="pageIndex"
+        [pageSizeOptions]="[20, 30, 50]"
+        [showFirstLastButtons]="true"
+        aria-label="Select page">
+      </mat-paginator>
+    </app-footer>
+    } @else {
+    <app-empty-template>
+      <mat-icon>info_outlined</mat-icon>
+      <p>Класс не выбран</p>
+    </app-empty-template>
+    }
+  </div>
+</div>

@@ -1,0 +1,131 @@
+<div
+  api-resolver
+  [errorCode]="errorCode"
+  [errorMessage]="errorMessage"
+  [loading]="loading"
+  (reload)="getPassport()">
+  <ng-container *ngIf="passportData.length; else noPassport">
+    <div class="container">
+      <div class="action-panel">
+        <h3 class="header">{{ name }}</h3>
+        <button
+          matTooltip="Скачать паспорт в excel"
+          mat-icon-button
+          matIconButtonCustom
+          [isIconButton]="true"
+          [buttonLoading]="downloadExcelLoading"
+          [width]="30"
+          [height]="30"
+          [iconsSize]="20"
+          (click)="downLoadPassport('xlsx')">
+          <mat-icon svgIcon="custom_excel" />
+        </button>
+        <button
+          matTooltip="Скачать паспорт в pdf"
+          mat-icon-button
+          matIconButtonCustom
+          [isIconButton]="true"
+          [buttonLoading]="downloadPdfLoading"
+          [width]="30"
+          [height]="30"
+          [iconsSize]="20"
+          (click)="downLoadPassport('pdf')">
+          <mat-icon>get_app</mat-icon>
+        </button>
+        <button
+          matTooltip="Редактировать объект"
+          mat-icon-button
+          matIconButtonCustom
+          [width]="30"
+          [height]="30"
+          [iconsSize]="20"
+          (click)="openInNewTab()">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </div>
+      <div class="passport-header">
+        <mat-chip-listbox class="tabs-list">
+          @for (tab of calculatedPassportData; track tab;let idx = $index) {
+          <mat-chip-option
+            #chip
+            [selected]="tab === currentPassport"
+            [selectable]="!chip.selected"
+            (selectionChange)="setChipSelection($event, idx)"
+            class="chip"
+            >{{ tab.label }}</mat-chip-option
+          >
+          }
+        </mat-chip-listbox>
+      </div>
+      <div class="table-data">
+        <cdk-virtual-scroll-viewport
+          tvsItemSize
+          bufferMultiplier="80"
+          class="scroll-container">
+          <table
+            *ngIf="currentPassport.data; else emptyTemplate"
+            mat-table
+            [dataSource]="currentPassport.data"
+            multiTemplateDataRows
+            class="table">
+            <ng-container
+              *ngFor="let column of currentPassport.displayedColumns; let i = index"
+              [matColumnDef]="column">
+              @if(column==='link') {
+              <th
+                mat-header-cell
+                *matHeaderCellDef></th>
+              <td
+                mat-cell
+                *matCellDef="let row">
+                <button
+                  matTooltip="Редактировать объект"
+                  mat-icon-button
+                  matIconButtonCustom
+                  [width]="30"
+                  [height]="30"
+                  [iconsSize]="20"
+                  (click)="openInNewTab(row[i]?.value)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+              </td>
+              } @else {
+              <th
+                mat-header-cell
+                *matHeaderCellDef>
+                {{ column }}
+              </th>
+              <td
+                mat-cell
+                *matCellDef="let row">
+                <div
+                  class="cell-data"
+                  [matTooltip]="row[i]?.info">
+                  {{ row[i]?.value | default }}
+                </div>
+              </td>
+              }
+            </ng-container>
+            <tr
+              mat-header-row
+              *matHeaderRowDef="currentPassport.displayedColumns; sticky: true"></tr>
+            <tr
+              mat-row
+              *matRowDef="let row; columns: currentPassport.displayedColumns"></tr>
+          </table>
+        </cdk-virtual-scroll-viewport>
+        <ng-template #emptyTemplate>
+          <app-empty-template>
+            <p class="no-data">Нет данных</p>
+          </app-empty-template>
+        </ng-template>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #noPassport>
+    <app-empty-template>
+      <mat-icon>error</mat-icon>
+      <p>Такого паспорта не существует</p>
+    </app-empty-template>
+  </ng-template>
+</div>

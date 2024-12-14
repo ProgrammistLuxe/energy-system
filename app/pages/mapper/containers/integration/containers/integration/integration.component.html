@@ -1,0 +1,24 @@
+<div
+  api-resolver
+  [loading]="loading"
+  [errorCode]="errorCode"
+  [errorMessage]="errorMessage"
+  (reload)="getIntegration()"
+  class="container">
+  @if (!!selectedIntegration) {
+  <app-breadcrumbs [name]="selectedIntegration.name" />
+  <div class="integration-container">
+    <app-participants />
+    <div class="content">
+      <app-class-types />
+      <mat-divider vertical />
+      <app-attrs />
+    </div>
+  </div>
+  } @else {
+  <app-empty-template>
+    <mat-icon fontSize="material-icons-outlined">error</mat-icon>
+    <p>Интеграция не найдена</p>
+  </app-empty-template>
+  }
+</div>

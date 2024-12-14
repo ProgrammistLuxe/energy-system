@@ -1,0 +1,19 @@
+<div
+  api-resolver
+  [errorCode]="errorCode"
+  [errorMessage]="errorMessage"
+  [loading]="loading || (iconsLoading$ | async)"
+  (reload)="getSchema()">
+  @if(!(iconsLoading$ |async)) { @if(schemaData) {
+  <div class="container">
+    <app-passport-schema-chart [schemaData]="schemaData" />
+  </div>
+  } @else {
+  <ng-template #noSchema>
+    <app-empty-template>
+      <mat-icon>error</mat-icon>
+      <p>Такой схемы не существует</p>
+    </app-empty-template>
+  </ng-template>
+  } }
+</div>

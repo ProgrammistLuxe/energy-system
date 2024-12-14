@@ -1,0 +1,45 @@
+<ng-container *ngIf="auth$ | async">
+  <div
+    [matMenuTriggerFor]="userMenu"
+    class="profile">
+    <div class="logo">
+      <img
+        src="assets/images/logo-light.png"
+        alt="logo"
+        class="logo-img" />
+    </div>
+    <div class="user-info">
+      <p class="user-name text">{{ userNameCompiled }}</p>
+      <p class="role text">{{ user?.job_title }}</p>
+    </div>
+  </div>
+  <mat-menu
+    #userMenu="matMenu"
+    xPosition="before"
+    class="user-profile-menu">
+    <div class="menu-block">
+      <a
+        routerLink="password-change"
+        routerLinkActive="active"
+        class="link">
+        <mat-icon>key_vertical</mat-icon>
+        <p class="link-text">Сменить пароль</p>
+      </a>
+      <a
+        routerLink="settings"
+        routerLinkActive="active"
+        class="link">
+        <mat-icon>settings</mat-icon>
+        <p class="link-text">Настройки</p>
+      </a>
+      <a
+        routerLink="auth"
+        routerLinkActive="active"
+        (click)="$event.preventDefault(); logOut()"
+        class="link">
+        <mat-icon>logout</mat-icon>
+        <p class="link-text">Выйти</p>
+      </a>
+    </div>
+  </mat-menu>
+</ng-container>

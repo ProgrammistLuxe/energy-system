@@ -1,0 +1,54 @@
+.diffs-table {
+  width: 550px;
+  height: 60px;
+  background-color: var(--table-bg-dark);
+  padding: 10px 15px;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 710;
+  &.expanded {
+    height: 350px;
+  }
+  transition: height 500ms ease-in-out;
+}
+.title {
+  margin-bottom: 0;
+}
+.header {
+  height: 30px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+.table-container {
+  position: relative;
+  width: 100%;
+  height: calc(100% - 45px);
+  overflow: auto;
+}
+.table {
+  width: 100%;
+  height: fit-content;
+  background-color: inherit;
+  th {
+    font-family: Inter, sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    color: var(--table-head-text);
+    background-color: var(--table-head-background);
+  }
+  td {
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    height: 36px;
+    color: var(--text-color);
+  }
+}

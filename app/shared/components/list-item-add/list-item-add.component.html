@@ -1,0 +1,15 @@
+<div class="add">
+  <div
+    class="button"
+    mat-icon-button
+    (click)="clicked.emit()">
+    <mat-icon class="button-icon">add</mat-icon>
+  </div>
+  <div class="add-content">
+    <p
+      [overflowTooltip]="name"
+      class="text">
+      {{ name || '--' }}
+    </p>
+  </div>
+</div>

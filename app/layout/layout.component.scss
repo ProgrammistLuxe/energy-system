@@ -1,0 +1,53 @@
+.app-content {
+  height: 100%;
+}
+.main-container {
+  height: calc(100% - 44px);
+  background-color: var(--bg);
+}
+
+// Landscape warning
+.landscape-warning {
+  display: none;
+  text-align: center;
+  height: 100%;
+}
+.landscape-warning-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+.landscape-warning-icon {
+  $size: 48px;
+  font-size: $size;
+  height: $size;
+  width: $size;
+  line-height: $size;
+}
+@media only screen and (orientation: portrait) {
+  .app-content {
+    display: none;
+  }
+  .landscape-warning {
+    display: block;
+  }
+}
+@media only screen and (orientation: landscape) {
+  .app-content {
+    display: block;
+  }
+  .landscape-warning {
+    display: none;
+  }
+}
+@media print {
+  .app-content {
+    display: block;
+  }
+  .landscape-warning {
+    display: none;
+  }
+}

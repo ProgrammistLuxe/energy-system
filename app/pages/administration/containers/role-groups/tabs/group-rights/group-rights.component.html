@@ -1,0 +1,46 @@
+<ng-container *ngIf="!loading">
+  <div class="permissions-workspace">
+    <div class="selected-permissions">
+      <h2 class="header">Выбранные права</h2>
+      <div
+        [appCheckScroll]
+        class="selected-permissions-container">
+        <app-list-item-remove
+          *displayList="let right of selectedPermissions; empty: 'Список пуст'"
+          [name]="right.name"
+          class="permission"
+          (clicked)="unSelectPermission(right)" />
+      </div>
+    </div>
+    <mat-divider
+      vertical
+      class="divider"></mat-divider>
+    <div class="all-permissions">
+      <h2 class="header">Все права</h2>
+      <div class="search-field">
+        <app-search-field (search)="onSearchPermissionsValueChanged($event)" />
+      </div>
+      <div class="all-permissions-container">
+        <app-list-item-add
+          *displayList="let right of filteredAllPermissions; empty: 'Список пуст'"
+          [name]="right.name"
+          class="permission"
+          (clicked)="selectPermission(right)" />
+      </div>
+    </div>
+  </div>
+  <app-footer class="footer">
+    <button
+      mat-flat-button
+      [buttonLoading]="saveLoading"
+      (click)="saveData()">
+      Сохранить
+    </button>
+    <button
+      mat-button
+      (click)="getData()">
+      Отменить
+    </button>
+  </app-footer>
+</ng-container>
+<app-loading [loading]="loading"></app-loading>

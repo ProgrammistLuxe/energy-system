@@ -1,0 +1,143 @@
+<div
+  class="work-space"
+  api-resolver
+  [errorCode]="errorCode"
+  [errorMessage]="errorMessage"
+  [loading]="loading"
+  (reload)="getData()">
+  <div class="search-field">
+    <div
+      appAddButton
+      matTooltip="Добавить атрибут"
+      (click)="addItem()"></div>
+    <app-search-field
+      (search)="searchData($event)"
+      [fieldsToSearch]="fieldsToSearch"></app-search-field>
+  </div>
+  <div class="table-container">
+    <ng-container *ngIf="dataSource.data?.length > 0; else listEmpty">
+      <ng-container>
+        <table
+          class="table"
+          mat-table
+          [dataSource]="dataSource">
+          <ng-container matColumnDef="name">
+            <th
+              *matHeaderCellDef
+              mat-header-cell
+              mat-sort-header="name">
+              Имя атрибута (англ.)
+            </th>
+            <td
+              *matCellDef="let element"
+              mat-cell>
+              {{ element.name | default }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="description">
+            <th
+              *matHeaderCellDef
+              mat-header-cell
+              mat-sort-header="description">
+              Смысловое назначение атрибута
+            </th>
+            <td
+              *matCellDef="let element"
+              mat-cell>
+              {{ element.description | default }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="attributes_class">
+            <th
+              *matHeaderCellDef
+              mat-header-cell
+              mat-sort-header="attributes_class">
+              Имя класса атрибута (англ.)
+            </th>
+            <td
+              *matCellDef="let element"
+              class="attr-class"
+              matTooltip="Перейти к классу"
+              (click)="goToClass(element.attributes_class)"
+              mat-cell>
+              {{ element.attributes_class.class_name | default }}
+              {{ element.attributes_class.is_library ? '(Справочник)' : '' }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="type">
+            <th
+              *matHeaderCellDef
+              mat-header-cell
+              mat-sort-header="type">
+              Тип данных
+            </th>
+            <td
+              *matCellDef="let element"
+              mat-cell>
+              {{ element.type | default }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="explanation">
+            <th
+              *matHeaderCellDef
+              mat-header-cell>
+              Комментарий
+            </th>
+            <td
+              *matCellDef="let element"
+              mat-cell
+              [overflowTooltip]="element.explanation || ''">
+              {{ element.explanation | default }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="actions">
+            <th
+              *matHeaderCellDef
+              mat-header-cell></th>
+            <td
+              *matCellDef="let element"
+              mat-cell>
+              <div class="actions-container">
+                <button
+                  mat-icon-button
+                  matIconButtonCustom
+                  [width]="30"
+                  [height]="30"
+                  [iconsSize]="20"
+                  matTooltip="Редактировать элемент"
+                  (click)="editItem(element)">
+                  <mat-icon> edit</mat-icon>
+                </button>
+                <button
+                  mat-icon-button
+                  matIconButtonCustom
+                  [width]="30"
+                  [height]="30"
+                  [iconsSize]="20"
+                  matTooltip="Удалить элемент"
+                  (click)="deleteItem(element)">
+                  <mat-icon> delete_forever</mat-icon>
+                </button>
+              </div>
+            </td>
+          </ng-container>
+          <tr
+            *matHeaderRowDef="columns; sticky: true"
+            mat-header-row
+            class="table-head"></tr>
+          <tr
+            *matRowDef="let row; columns: columns"
+            mat-row
+            class="table-row"></tr>
+        </table>
+      </ng-container>
+    </ng-container>
+    <ng-template #listEmpty>
+      <app-empty-template>
+        <p>Список пуст</p>
+      </app-empty-template>
+    </ng-template>
+  </div>
+</div>

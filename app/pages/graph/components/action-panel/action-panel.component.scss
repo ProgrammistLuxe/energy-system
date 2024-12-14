@@ -1,0 +1,44 @@
+.action-panel {
+  width: 100%;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+  padding: 0 20px;
+}
+.mode-select {
+  width: 240px;
+  border: 1px solid var(--light-blue-border);
+  border-radius: 5px;
+  padding: 0 10px;
+}
+.history {
+  width: calc(100% - 240px);
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 15px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+.load-graph {
+  height: 40px;
+}
+.chip {
+  width: 180px;
+  cursor: pointer;
+}
+.chip-content {
+  max-width: 130px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+  margin: 0;
+}
+:host::ng-deep {
+  .mdc-evolution-chip-set__chips {
+    flex-flow: nowrap !important;
+  }
+}

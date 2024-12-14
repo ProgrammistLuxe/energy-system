@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="passport-template-container">
+    <h2 class="title">Новый шаблон</h2>
+    <mat-divider
+      horizontal
+      class="divider"></mat-divider>
+    <div class="template-name compact-form-field-area">
+      <mat-form-field appearance="outline">
+        <mat-label>Название</mat-label>
+        <input
+          matInput
+          [formControl]="templateName"
+          type="text"
+          required />
+        <mat-error mat-error-ext />
+      </mat-form-field>
+    </div>
+    <button
+      mat-flat-button
+      class="add-attr"
+      (click)="addAttribute()">
+      <mat-icon>add</mat-icon>
+      Добавить атрибут
+    </button>
+    <div class="attrs-form compact-form-field-area">
+      <div
+        *ngFor="let attrForm of attributes.controls; let i = index"
+        class="attr-group"
+        [formGroup]="attrForm">
+        <div>
+          <p class="label">Атрибут {{ i + 1 }}</p>
+          <mat-form-field class="select">
+            <mat-select
+              (valueChange)="setAttrType($event, i)"
+              formControlName="class">
+              <mat-option
+                *ngFor="let attr of attrList"
+                [value]="attr.id"
+                >{{ attr.name }}</mat-option
+              >
+            </mat-select>
+            <mat-error mat-error-ext />
+          </mat-form-field>
+        </div>
+        <mat-form-field class="input-field">
+          <input
+            matInput
+            class="input"
+            formControlName="type" />
+          <mat-error mat-error-ext />
+        </mat-form-field>
+        <button
+          mat-icon-button
+          class="delete-icon-button"
+          (click)="deleteAttributes(i)">
+          <mat-icon class="delete-icon">delete_forever</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+  <app-footer class="footer">
+    <button
+      mat-flat-button
+      [disabled]="attrForm.invalid || templateName.invalid || !attributes.controls.length"
+      [buttonLoading]="saveLoading"
+      (click)="saveNode()">
+      Сохранить и Опубликовать
+    </button>
+    <button
+      mat-flat-button
+      [buttonLoading]="saveLoading"
+      [disabled]="attrForm.invalid || templateName.invalid || !attributes.controls.length"
+      class="button-draft"
+      (click)="saveDraft()">
+      Создать черновик
+    </button>
+    <button
+      [buttonLoading]="saveLoading"
+      mat-button
+      class="button-cancel"
+      (click)="goBack()">
+      Отменить
+    </button>
+  </app-footer>
+</div>

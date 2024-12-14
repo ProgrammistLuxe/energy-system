@@ -1,0 +1,18 @@
+<div
+  (click)="openFileinput()"
+  class="file-input-wrapper">
+  <input
+    [overflowTooltip]="fileNames"
+    type="file"
+    [multiple]="multiple"
+    [accept]="accept"
+    id="file_input"
+    class="file-input" />
+  @if(value) {
+  <div
+    class="file-names"
+    [overflowTooltip]="fileNames">
+    {{ fileNames }}
+  </div>
+  }
+</div>

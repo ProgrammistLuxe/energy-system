@@ -1,0 +1,29 @@
+.global-search {
+  width: 500px;
+  background-color: var(--side-panel-bg);
+}
+.result-container {
+  width: 100%;
+  padding-top: 15px;
+}
+
+.header {
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+.result-container-data {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: calc(100% - 60px);
+  justify-content: flex-start;
+  max-height: 200px;
+  overflow: auto;
+}
+.item {
+  height: 30px;
+  width: fit-content;
+  max-width: 100%;
+  text-decoration: underline;
+  color: var(--text-color);
+}

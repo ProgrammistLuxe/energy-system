@@ -1,0 +1,32 @@
+<div class="work-space">
+  <div class="icon-block">
+    <mat-icon class="material-symbols-outlined">docs</mat-icon>
+  </div>
+  <div class="text-block">
+    <p class="text">Действия с профилем</p>
+  </div>
+  <div class="actions">
+    <button
+      mat-flat-button
+      (click)="goToProfile()">
+      Посмотреть текущий профиль
+    </button>
+    <button
+      mat-flat-button
+      [buttonLoading]="downloadLoading"
+      (click)="downloadProfile()">
+      Выгрузить текущий профиль
+    </button>
+    <button
+      mat-flat-button
+      [buttonLoading]="uploadLoading"
+      (click)="uploadProfile(file)">
+      Загрузить профиль
+    </button>
+    <input
+      #file
+      class="file-input"
+      type="file"
+      [accept]="'.xlsx'" />
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<div class="selected">
+  <p
+    [overflowTooltip]="name"
+    class="text">
+    {{ name || '--' }}
+  </p>
+  <div
+    class="button"
+    mat-icon-button
+    (click)="clicked.emit()">
+    <mat-icon class="button-icon">remove</mat-icon>
+  </div>
+</div>

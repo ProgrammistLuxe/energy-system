@@ -1,0 +1,28 @@
+<div class="edit-node">
+  <div class="dialog-content-wrapper compact-form-field-area">
+    <mat-form-field
+      class="name"
+      appearance="outline">
+      <mat-label>Название</mat-label>
+      <input
+        [formControl]="titleControl"
+        maxlength="255"
+        matInput
+        type="text" />
+      <mat-error mat-error-ext></mat-error>
+    </mat-form-field>
+  </div>
+  <div class="button-block">
+    <button
+      mat-flat-button
+      [disabled]="titleControl.invalid"
+      (click)="editNode()">
+      Обновить
+    </button>
+    <button
+      mat-button
+      [mat-dialog-close]="false">
+      Отменить
+    </button>
+  </div>
+</div>

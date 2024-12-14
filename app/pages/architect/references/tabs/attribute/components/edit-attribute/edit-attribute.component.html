@@ -1,0 +1,71 @@
+<div class="edit-attr">
+  <div
+    [formGroup]="form"
+    class="dialog-content-wrapper compact-form-field-area">
+    <mat-form-field appearance="outline">
+      <mat-label>Название</mat-label>
+      <input
+        formControlName="name"
+        matInput
+        type="text" />
+      <mat-error mat-error-ext></mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Описание</mat-label>
+      <input
+        formControlName="description"
+        matInput
+        type="text" />
+      <mat-error mat-error-ext></mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Комментарий</mat-label>
+      <input
+        formControlName="explanation"
+        matInput
+        type="text" />
+      <mat-error mat-error-ext></mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Тип данных</mat-label>
+      <mat-select formControlName="type">
+        @for(item of attrTypes$ | async; track item) {
+        <mat-option [value]="item">{{ item }}</mat-option>
+        }
+      </mat-select>
+      <mat-error mat-error-ext></mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Класс атрибута</mat-label>
+      <mat-select formControlName="attributes_class">
+        @for(item of classList$ | async; track item) {
+        <mat-option [value]="item.id">{{ item.class_name }}</mat-option>
+        }
+      </mat-select>
+      <mat-error mat-error-ext></mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Префикс</mat-label>
+      <mat-select formControlName="attribute_prefix">
+        @for(item of prefixList$ | async; track item) {
+        <mat-option [value]="item.id">{{ item.short_name }}</mat-option>
+        }
+      </mat-select>
+      <mat-error mat-error-ext></mat-error>
+    </mat-form-field>
+  </div>
+  <div class="button-block">
+    <button
+      mat-flat-button
+      [buttonLoading]="saveLoading"
+      [disabled]="form.invalid"
+      (click)="editAttr()">
+      Редактировать
+    </button>
+    <button
+      mat-button
+      [mat-dialog-close]="false">
+      Отменить
+    </button>
+  </div>
+</div>

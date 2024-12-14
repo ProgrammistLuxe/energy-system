@@ -1,0 +1,30 @@
+.integration-list-container {
+  height: 100%;
+  width: 100%;
+  background-color: var(--bg);
+}
+.integration-list {
+  position: relative;
+  height: calc(100% - 64px);
+  width: 100%;
+  overflow: auto;
+  padding: 8px 0;
+}
+.integration-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  padding: 0 24px;
+  &:not(:last-child) {
+    margin-bottom: 8px;
+  }
+  &:hover {
+    background-color: var(--element-hover-2);
+    cursor: pointer;
+  }
+  &.selected {
+    background-color: var(--selected);
+  }
+}

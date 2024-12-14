@@ -1,0 +1,99 @@
+<div
+  api-resolver
+  [errorCode]="errorCode"
+  [errorMessage]="errorMessage"
+  [loading]="loading"
+  (reload)="getNode()">
+  <ng-container *ngIf="!!currentNode; else noNode">
+    <div class="container">
+      <div class="passport-template-container">
+        <div class="template-name compact-form-field-area">
+          <mat-form-field appearance="outline">
+            <mat-label>Название</mat-label>
+            <input
+              matInput
+              [formControl]="templateName"
+              type="text"
+              required />
+            <mat-error mat-error-ext />
+          </mat-form-field>
+        </div>
+        <mat-divider
+          horizontal
+          class="divider"></mat-divider>
+        <button
+          mat-flat-button
+          class="add-attr"
+          (click)="addAttribute()">
+          <mat-icon>add</mat-icon>
+          Добавить атрибут
+        </button>
+        <div class="attrs-form compact-form-field-area">
+          <div
+            *ngFor="let attrForm of attributes.controls; let i = index"
+            class="attr-group"
+            [formGroup]="attrForm">
+            <div>
+              <p class="label">Атрибут {{ i + 1 }}</p>
+              <mat-form-field class="select">
+                <mat-select
+                  (valueChange)="setAttrType($event, i)"
+                  formControlName="class">
+                  <mat-option
+                    *ngFor="let attr of attrList"
+                    [value]="attr.id"
+                    >{{ attr.name }}</mat-option
+                  >
+                </mat-select>
+                <mat-error mat-error-ext />
+              </mat-form-field>
+            </div>
+            <mat-form-field class="input-field">
+              <input
+                matInput
+                class="input"
+                formControlName="type" />
+              <mat-error mat-error-ext />
+            </mat-form-field>
+            <button
+              mat-icon-button
+              class="delete-icon-button"
+              (click)="deleteAttributes(i)">
+              <mat-icon class="delete-icon">delete_forever</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+      <app-footer class="footer">
+        <button
+          mat-flat-button
+          [buttonLoading]="saveLoading"
+          [disabled]="attrForm.invalid || templateName.invalid || !attributes.controls.length"
+          (click)="saveNode()">
+          Сохранить и опубликовать
+        </button>
+        <button
+          mat-button
+          [disabled]="attrForm.invalid || templateName.invalid || !attributes.controls.length"
+          [buttonLoading]="saveLoading"
+          class="button-draft"
+          (click)="createDraft()">
+          Создать черновик
+        </button>
+        <button
+          [buttonLoading]="saveLoading"
+          mat-button
+          class="button-cancel"
+          (click)="getNode()">
+          Отменить
+        </button>
+      </app-footer>
+    </div>
+  </ng-container>
+  <ng-template #noNode>
+    <app-empty-template>
+      <mat-icon fontSize="material-icons-outlined">error</mat-icon>
+      <p>Такго шаблона не существет</p>
+    </app-empty-template>
+  </ng-template>
+</div>

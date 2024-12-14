@@ -1,0 +1,13 @@
+.action-panel-container {
+  width: 100%;
+  height: 64px;
+  background-color: var(--bg);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 10px 0 24px;
+  gap: 15px;
+}
+.header {
+  margin: 0;
+}

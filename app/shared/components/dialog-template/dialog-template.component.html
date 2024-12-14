@@ -1,0 +1,16 @@
+<div class="dialog-container">
+  <div class="title-block">
+    <h2
+      class="title"
+      [overflowTooltip]="dialogServiceConfig.title || ''">
+      {{ dialogServiceConfig.title }}
+    </h2>
+    <mat-icon
+      *ngIf="!dialogServiceConfig.hideCloseButton"
+      mat-dialog-close
+      class="close-icon">
+      close
+    </mat-icon>
+  </div>
+  <ng-container #container></ng-container>
+</div>

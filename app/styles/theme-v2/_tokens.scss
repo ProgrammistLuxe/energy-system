@@ -1,0 +1,54 @@
+@use '@angular/material' as mat;
+
+@mixin typography() {
+  --mat-sys-display-large: 600 20px / 24px 'Roboto';
+  --mat-sys-display-medium: 400 18px/32px 'Roboto';
+  --mat-sys-display-large-tracking: normal;
+  --mat-sys-display-small: 600 16px/24px 'Roboto';
+  --mat-sys-body-large: 400 14px/20px 'Roboto';
+  --mat-sys-body-large-tracking: normal;
+  --mat-sys-body-large-size: 14px;
+  --mat-sys-title-small: 600 14px /14px 'Roboto';
+  --mat-sys-label-large-weight: 600;
+  --mat-sys-headline-large: 400 14px/20px 'Roboto';
+  --mat-sys-headline-medium: 400 14px/24px 'Roboto';
+}
+
+@mixin system-static() {
+  --mat-badge-line-height: 22px;
+  --mdc-icon-button-icon-color: var(--text-color);
+  --mdc-fab-small-hover-container-elevation-shadow: none;
+  --mdc-fab-small-focus-container-elevation-shadow: none;
+  --mat-badge-background-color: var(--light-blue-bg);
+  --mat-badge-text-color: var(--text-white);
+  --mdc-filled-text-field-container-color: var(--text-color);
+  --mdc-filled-text-field-label-text-color: var(--text-color-dark);
+  --mat-menu-container-color: var(--bg-gray);
+  --sys-surface: var(--bg-gray);
+  --mdc-switch-selected-handle-color: var(--button-color);
+  --mdc-switch-selected-focus-handle-color: var(--active);
+  --mdc-switch-selected-hover-handle-color: var(--element-hover);
+  --mdc-filled-text-field-focus-label-text-color: var(--text-color-light-blue);
+  --mdc-checkbox-selected-checkmark-color: var(--bg);
+  --mdc-filled-text-field-caret-color: var(--text-color-light-blue);
+  --mat-minimal-pseudo-checkbox-selected-checkmark-color: var(--text-color-light-blue-lighten);
+  --mdc-outlined-text-field-focus-outline-color: var(--text-color);
+  --mdc-outlined-text-field-focus-label-text-color: var(--text-color);
+  --mdc-outlined-text-field-caret-color: var(--text-color);
+  --mat-sys-background: var(--bg);
+  --mat-sys-on-background: var(--side-panel-bg);
+  --mat-sys-primary: var(--text-color-light-blue);
+  --mat-sys-primary-container: var(--text-color);
+  --mat-sys-on-primary: var(--text-white);
+  --mat-sys-secondary-container: rgba(255, 255, 255, 0.08);
+  --mat-sys-on-secondary-container: var(--text-color-light-blue-lighten);
+  --mat-sys-surface-container: var(--side-panel-bg);
+  --mat-sys-surface-variant: var(--selected);
+  --mat-sys-on-surface-variant: var(--text-color-light-grey);
+  --mat-sys-on-surface: var(--text-color);
+  --mat-sys-tertiary: var(--text-color-light-blue);
+  --mat-sys-on-tertiary: black;
+  --mat-sys-error: var(--error);
+  --mat-sys-on-error-container: var(--error);
+  --mat-sys-outline: var(--divider);
+}

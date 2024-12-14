@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  margin: 32px 32px 100px 32px;
+}
+
+.rights-selected {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 50%;
+  max-width: 778px;
+  padding: 0 25px 0 0;
+  height: 100%;
+}
+
+.rights-all {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 50%;
+  max-width: 778px;
+  padding: 0 0 0 40px;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

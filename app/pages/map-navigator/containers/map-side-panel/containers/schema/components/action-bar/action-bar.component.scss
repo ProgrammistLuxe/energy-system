@@ -1,0 +1,23 @@
+.panel-tool {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+  margin-bottom: 10px;
+}
+.clear-workspace-btn {
+  color: var(--error) !important;
+  max-width: fit-content;
+}
+.export-select {
+  width: 180px;
+}
+.select-button {
+  width: 120px !important;
+}
+.select-button-content {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}

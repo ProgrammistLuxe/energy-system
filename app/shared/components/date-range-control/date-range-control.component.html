@@ -1,0 +1,66 @@
+<div
+  class="date-time-range-control-container"
+  [class.disabled]="disabled"
+  [matMenuTriggerFor]="menu"
+  (menuOpened)="onFocusIn(); calendar.focusActiveCell()"
+  (menuClosed)="onFocusOut()"
+  (click)="$event.stopPropagation()">
+  <span>
+    <ng-container *ngIf="value">
+      {{ displayStart ? (displayStart.toString() | date: DATE_PIPE_FORMAT) : '' }}
+      @if (displayStart) {
+      <span> -</span>
+      }
+      {{ displayEnd ? (displayEnd.toString() | date: DATE_PIPE_FORMAT) : '' }}
+    </ng-container>
+  </span>
+</div>
+<mat-menu
+  #menu="matMenu"
+  class="date-time-picker-menu date-control-menu">
+  <form
+    class="menu-container"
+    (click)="$event.stopPropagation()"
+    (keydown.tab)="$event.stopPropagation()"
+    [formGroup]="form">
+    <div class="interval">
+      <p class="menu-date-time-label mat-body-2">Начало интервала</p>
+      <div class="interval-container">
+        <mat-calendar
+          #calendar
+          [lang]="'ru-Ru'"
+          [selected]="form.get('start')?.value"
+          [minDate]="min"
+          [maxDate]="startMax || form.get('end')?.value || max"
+          [startAt]="form.get('start')?.value"
+          (selectedChange)="_onSelectedChange($event, 'start')"></mat-calendar>
+      </div>
+    </div>
+
+    <div class="interval">
+      <p class="menu-date-time-label mat-body-2">Конец интервала</p>
+      <div class="interval-container">
+        <mat-calendar
+          [minDate]="endMin || form.get('start')?.value"
+          [maxDate]="max"
+          [startAt]="form.get('end')?.value"
+          [selected]="form.get('end')?.value"
+          (selectedChange)="_onSelectedChange($event, 'end')"></mat-calendar>
+      </div>
+    </div>
+  </form>
+  <div class="control-buttons">
+    <button
+      class="small"
+      mat-flat-button
+      (click)="submit()">
+      Применить
+    </button>
+    <button
+      class="small"
+      mat-button
+      (click)="close()">
+      Закрыть
+    </button>
+  </div>
+</mat-menu>

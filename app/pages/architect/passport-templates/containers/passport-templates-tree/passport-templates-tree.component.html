@@ -1,0 +1,266 @@
+<div class="tree-container">
+  <div class="action-panel">
+    <div
+      [matTooltip]="'Создать папку'"
+      appAddButton
+      (click)="createParentFolder()"></div>
+    <app-search-field (search)="onSearchValueChanged($event)" />
+  </div>
+
+  <div
+    api-resolver
+    [errorCode]="errorCode"
+    [errorMessage]="errorMessage"
+    [loading]="loading"
+    (reload)="loadTree()"
+    class="tree">
+    <ng-container *ngIf="dataSource.data.length; else emptyTree">
+      <mat-tree
+        #treeSelector
+        [dataSource]="dataSource"
+        [treeControl]="treeControl">
+        <mat-tree-node
+          *matTreeNodeDef="let node"
+          matTreeNodePadding
+          [class.selected]="node.nodeId === currentNode?.nodeId"
+          [class.folder]="node.type === 'folder'"
+          class="tree-node"
+          (click)="selectNode(node)">
+          <div class="node-section">
+            <div class="toggle-section">
+              <button
+                *ngIf="node.expandable"
+                mat-icon-button
+                matIconButtonCustom
+                [width]="24"
+                [height]="24"
+                [iconsSize]="20"
+                [attr.aria-label]="'Toggle ' + node.nodeId"
+                matTreeNodeToggle>
+                <mat-icon
+                  [class.selected]="node.nodeId === currentNode?.nodeId"
+                  class="expand-icon">
+                  {{ treeControl.isExpanded(node) ? 'arrow_drop_down' : 'arrow_right' }}
+                </mat-icon>
+              </button>
+              <mat-icon
+                *ngIf="node.type === 'folder'"
+                class="icon"
+                [class.selected]="node.nodeId === currentNode?.nodeId">
+                folder
+              </mat-icon>
+              <mat-icon
+                *ngIf="node.type === 'template'"
+                [class.selected]="node.nodeId === currentNode?.nodeId"
+                class="icon">
+                description
+              </mat-icon>
+              <mat-icon
+                *ngIf="node.type === 'draft'"
+                [class.selected]="node.nodeId === currentNode?.nodeId"
+                [fontSet]="'material-symbols-outlined'"
+                class="icon material-symbols-outlined">
+                draft
+              </mat-icon>
+            </div>
+            <p
+              [class.selected]="node.nodeId === currentNode?.nodeId"
+              [overflowTooltip]="node.title"
+              class="title">
+              {{ node.title }}
+            </p>
+          </div>
+          <div class="node-section">
+            <mat-spinner
+              *ngIf="node.loading"
+              diameter="20"></mat-spinner>
+            <button
+              mat-icon-button
+              matIconButtonCustom
+              [width]="30"
+              [height]="30"
+              [iconsSize]="20"
+              [matMenuTriggerFor]="menuController"
+              (click)="$event.preventDefault(); $event.stopPropagation()">
+              <mat-icon class="material-symbols-outlined"> more_vert</mat-icon>
+            </button>
+            <mat-menu
+              class="context-menu"
+              #menuController="matMenu"
+              xPosition="before">
+              <button
+                *ngIf="node.type === 'folder'"
+                mat-menu-item
+                (click)="createChildFolder(node)">
+                <mat-icon
+                  [fontSet]="'material-icons-outlined'"
+                  class="material-symbols-outlined">
+                  folder
+                </mat-icon>
+                <span>Добавить папку</span>
+              </button>
+              <button
+                *ngIf="node.type === 'folder'"
+                mat-menu-item
+                (click)="createTemplate(node)">
+                <mat-icon class="material-symbols-outlined">description </mat-icon>
+                <span>Добавить шаблон</span>
+              </button>
+              <button
+                *ngIf="node.type === 'template' || node.type === 'draft'"
+                mat-menu-item
+                (click)="copyNode(node)">
+                <mat-icon class="material-symbols-outlined"> content_copy </mat-icon>
+                <span>Копировать</span>
+              </button>
+              <button
+                *ngIf="node.type === 'folder'"
+                mat-menu-item
+                (click)="pasteNode(node)">
+                <mat-icon class="material-symbols-outlined"> content_copy </mat-icon>
+                <span>Вставить</span>
+              </button>
+              <button
+                *ngIf="node.type === 'folder'"
+                mat-menu-item
+                [disableRipple]="true"
+                (click)="editFolder(node)">
+                <mat-icon class="material-symbols-outlined">edit</mat-icon>
+                <span>Редактировать</span>
+              </button>
+              <button
+                mat-menu-item
+                (click)="deleteNode(node)">
+                <mat-icon class="material-symbols-outlined">delete_forever</mat-icon>
+                <span>Удалить</span>
+              </button>
+            </mat-menu>
+          </div>
+        </mat-tree-node>
+        <mat-tree-node
+          *matTreeNodeDef="let node; when: hasChild"
+          matTreeNodePadding
+          [class.folder]="node.type === 'folder'"
+          [class.selected]="node.nodeId === currentNode?.nodeId"
+          class="tree-node"
+          (click)="selectNode(node)">
+          <div class="node-section">
+            <div class="toggle-section">
+              <button
+                mat-icon-button
+                matIconButtonCustom
+                [width]="24"
+                [height]="24"
+                [iconsSize]="20"
+                [attr.aria-label]="'Toggle ' + node.nodeId"
+                matTreeNodeToggle>
+                <mat-icon
+                  [class.selected]="node.nodeId === currentNode?.nodeId"
+                  class="expand-icon">
+                  {{ treeControl.isExpanded(node) ? 'arrow_drop_down' : 'arrow_right' }}
+                </mat-icon>
+              </button>
+              <mat-icon
+                *ngIf="node.type === 'folder'"
+                [class.selected]="node.nodeId === currentNode?.nodeId"
+                class="icon">
+                folder
+              </mat-icon>
+              <mat-icon
+                *ngIf="node.type === 'template'"
+                [class.selected]="node.nodeId === currentNode?.nodeId"
+                class="icon">
+                description
+              </mat-icon>
+              <mat-icon
+                *ngIf="node.type === 'draft'"
+                [fontSet]="'material-symbols-outlined'"
+                [class.selected]="node.nodeId === currentNode?.nodeId"
+                class="icon material-symbols-outlined">
+                draft
+              </mat-icon>
+            </div>
+            <p
+              [class.selected]="node.nodeId === currentNode?.nodeId"
+              [overflowTooltip]="node.title"
+              class="title">
+              {{ node.title }}
+            </p>
+          </div>
+          <div class="node-section">
+            <mat-spinner
+              *ngIf="node.loading"
+              diameter="20"></mat-spinner>
+            <button
+              mat-icon-button
+              matIconButtonCustom
+              [width]="30"
+              [height]="30"
+              [iconsSize]="20"
+              [matMenuTriggerFor]="menuController"
+              (click)="$event.preventDefault(); $event.stopPropagation()">
+              <mat-icon class="material-symbols-outlined"> more_vert</mat-icon>
+            </button>
+            <mat-menu
+              class="context-menu"
+              #menuController="matMenu"
+              xPosition="before">
+              <button
+                *ngIf="node.type === 'folder'"
+                mat-menu-item
+                (click)="createChildFolder(node)">
+                <mat-icon
+                  [fontSet]="'material-icons-outlined'"
+                  class="material-symbols-outlined">
+                  folder
+                </mat-icon>
+                <span>Добавить папку</span>
+              </button>
+              <button
+                *ngIf="node.type === 'folder'"
+                mat-menu-item
+                (click)="createTemplate(node)">
+                <mat-icon class="material-symbols-outlined">description </mat-icon>
+                <span>Добавить шаблон</span>
+              </button>
+              <button
+                *ngIf="node.type === 'template' || node.type === 'draft'"
+                mat-menu-item
+                (click)="copyNode(node)">
+                <mat-icon class="material-symbols-outlined"> content_copy </mat-icon>
+                <span>Копировать</span>
+              </button>
+              <button
+                *ngIf="node.type === 'folder'"
+                mat-menu-item
+                (click)="pasteNode(node)">
+                <mat-icon class="material-symbols-outlined"> content_copy </mat-icon>
+                <span>Вставить</span>
+              </button>
+              <button
+                *ngIf="node.type === 'folder'"
+                mat-menu-item
+                [disableRipple]="true"
+                (click)="editFolder(node)">
+                <mat-icon class="material-symbols-outlined">edit</mat-icon>
+                <span>Редактировать</span>
+              </button>
+              <button
+                mat-menu-item
+                (click)="deleteNode(node)">
+                <mat-icon class="material-symbols-outlined">delete_forever</mat-icon>
+                <span>Удалить</span>
+              </button>
+            </mat-menu>
+          </div>
+        </mat-tree-node>
+      </mat-tree>
+    </ng-container>
+    <ng-template #emptyTree>
+      <app-empty-template>
+        <p>В дереве нет шаблонов</p>
+        <mat-icon>info</mat-icon>
+      </app-empty-template>
+    </ng-template>
+  </div>
+</div>

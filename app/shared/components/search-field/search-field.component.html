@@ -1,0 +1,18 @@
+<div class="search-field-wrapper compact-form-field-area-small">
+  <mat-form-field
+    class="search-field"
+    appearance="outline">
+    <mat-icon class="search-icon">search</mat-icon>
+    <input
+      matInput
+      [formControl]="searchControl"
+      placeholder="Поиск" />
+  </mat-form-field>
+  @if(tooltipContent) {
+  <mat-icon
+    class="info-icon material-symbols-oulined"
+    [matTooltip]="tooltipContent"
+    >info_outlined</mat-icon
+  >
+  }
+</div>

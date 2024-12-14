@@ -1,0 +1,52 @@
+<div class="systems-container">
+  <app-breadcrumbs name="Системы" />
+  <app-action-panel>
+    <button
+      mat-flat-button
+      (click)="openEditSystemDialog()">
+      Создать систему
+    </button>
+  </app-action-panel>
+  <div
+    api-resolver
+    [loading]="loading"
+    [errorCode]="errorCode"
+    [errorMessage]="errorMessage"
+    (reload)="getSystemList()"
+    class="systems-content">
+    <div class="system-list">
+      @if (systemList.length) { @for (system of systemList; track system) {
+      <div class="system-list-item">
+        <p class="system-name">{{ system.name }}</p>
+        <div class="actions-block">
+          <button
+            mat-icon-button
+            matIconButtonCustom
+            [width]="28"
+            [height]="28"
+            [iconsSize]="20"
+            matTooltip="Редактировать"
+            (click)="openEditSystemDialog(system)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            matIconButtonCustom
+            [width]="28"
+            [height]="28"
+            [iconsSize]="20"
+            matTooltip="Удалить"
+            (click)="deleteSystem(system)">
+            <mat-icon>delete_forever</mat-icon>
+          </button>
+        </div>
+      </div>
+      } } @else {
+      <app-empty-template>
+        <mat-icon fontSize="material-icons-outlined">info</mat-icon>
+        <p>Участники не созданы</p>
+      </app-empty-template>
+      }
+    </div>
+  </div>
+</div>

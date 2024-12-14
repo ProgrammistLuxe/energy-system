@@ -1,0 +1,10 @@
+<div api-resolver>
+  @if(schema && !(iconsLoading$ | async)) {
+  <app-schema-chart [schemaData]="schema.schema" />
+  } @else {
+  <app-empty-template>
+    <mat-icon fontSize="material-icons-outlined">error</mat-icon>
+    <p>Такой схемы не существует</p>
+  </app-empty-template>
+  }
+</div>

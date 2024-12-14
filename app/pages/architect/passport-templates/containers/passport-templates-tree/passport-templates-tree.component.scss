@@ -1,0 +1,72 @@
+:host {
+  display: block;
+  height: 100%;
+}
+.tree-container {
+  height: 100%;
+  width: 400px;
+  padding: 15px;
+  position: absolute;
+  background-color: var(--dark-gray);
+}
+.action-panel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.tree {
+  position: relative;
+  height: calc(100% - 30px);
+  width: 100%;
+  overflow: auto;
+  padding: 15px 0;
+}
+.icon {
+  color: var(--text-white);
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+}
+.expand-icon {
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+  color: var(--expand-icon-color);
+}
+.title {
+  margin-bottom: 0;
+  max-width: 100%;
+  overflow: hidden;
+  text-wrap: nowrap;
+  text-overflow: ellipsis;
+}
+.selected {
+  color: var(--text-color-light-blue-lighten);
+}
+.node-section {
+  max-width: calc(100% - 60px);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.toggle-section {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+.tree-node {
+  width: 100%;
+  min-height: 0;
+  height: 32px;
+  justify-content: space-between;
+  background-color: var(--dark-gray);
+  &.selected {
+    background-color: var(--element-active-bg);
+  }
+}
+.tree-node:not(.folder) {
+  &:hover {
+    background-color: var(--tree-node-hover);
+    cursor: pointer;
+  }
+}

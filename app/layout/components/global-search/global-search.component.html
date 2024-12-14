@@ -1,0 +1,24 @@
+<div class="edit-group">
+  <div class="dialog-content-wrapper">
+    <app-search-field (search)="search($event)"></app-search-field>
+    <div class="result-container">
+      <h3 class="header">Возможные совпадения</h3>
+      <div class="result-container-data">
+        @if(items.length) { @for(item of items;track item) {
+        <a
+          (click)="dialogRef.close()"
+          matTooltip="Перейти на страницу"
+          [routerLink]="'/' + item.link"
+          class="item">
+          {{ item.name }}
+        </a>
+        } }@else {
+        <app-empty-template>
+          <p>Ничего не найдено</p>
+          <mat-icon>info</mat-icon>
+        </app-empty-template>
+        }
+      </div>
+    </div>
+  </div>
+</div>

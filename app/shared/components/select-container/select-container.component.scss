@@ -1,0 +1,13 @@
+.select-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+.select-options {
+  height: 100%;
+  overflow: auto;
+}
+:host {
+  height: 100%;
+}

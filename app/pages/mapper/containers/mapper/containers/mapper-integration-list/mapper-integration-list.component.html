@@ -1,0 +1,17 @@
+<div class="integration-list-container">
+  <div
+    api-resolver
+    [loading]="loading"
+    [errorCode]="errorCode"
+    [errorMessage]="errorMessage"
+    (reload)="getIntegrationList()"
+    class="integration-list">
+    <div
+      *displayList="let integration of integrationList; empty: 'Список пуст'"
+      class="integration-list-item"
+      [class.selected]="integration.id === selectedIntegration?.id"
+      (click)="selectIntegration(integration)">
+      <p>{{ integration.name }}</p>
+    </div>
+  </div>
+</div>

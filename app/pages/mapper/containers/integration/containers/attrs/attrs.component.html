@@ -1,0 +1,82 @@
+<div class="attrs-container">
+  <app-action-panel>
+    <p>Атрибуты</p>
+    <button
+      *ngIf="!!classTypeId && integrationParticipantList.length"
+      (click)="editAttr()"
+      mat-flat-button>
+      Добавить атрибут
+    </button>
+  </app-action-panel>
+  @if (integrationParticipantList.length) { @if (classTypeId) {
+  <div
+    api-resolver
+    [loading]="loading"
+    [errorCode]="errorCode"
+    [errorMessage]="errorMessage"
+    (reload)="getAttrList()"
+    class="attrs-table">
+    <table
+      mat-table
+      multiTemplateDataRows
+      [dataSource]="attrsTableData"
+      class="table">
+      @for (column of displayedColumns; let i = $index; track column) {
+      <ng-container [matColumnDef]="column">
+        <th
+          mat-header-cell
+          *matHeaderCellDef>
+          {{ column }}
+        </th>
+
+        <td
+          *matCellDef="let element"
+          mat-cell>
+          <div class="cell-content">
+            <p>{{ element[column]?.name | default }}</p>
+            <button
+              *ngIf="!!element[column]"
+              mat-icon-button
+              matIconButtonCustom
+              [width]="28"
+              [height]="28"
+              [iconsSize]="20"
+              matTooltip="Редактировать атрибут"
+              (click)="editAttr(element[column])">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button
+              *ngIf="!!element[column]"
+              mat-icon-button
+              matIconButtonCustom
+              [width]="28"
+              [height]="28"
+              [iconsSize]="20"
+              matTooltip="Удалить атрибут"
+              (click)="deleteAttr(element[column])">
+              <mat-icon>delete_forever</mat-icon>
+            </button>
+          </div>
+        </td>
+      </ng-container>
+      }
+      <tr
+        *matHeaderRowDef="displayedColumns; sticky: true"
+        mat-header-row></tr>
+      <tr
+        *matRowDef="let row; columns: displayedColumns"
+        mat-row></tr>
+    </table>
+  </div>
+  } @else {
+  <app-empty-template>
+    <mat-icon fontSize="material-icons-outlined">info</mat-icon>
+    <p>Выберите тип данных</p>
+  </app-empty-template>
+  } } @else {
+  <app-empty-template>
+    <mat-icon fontSize="material-icons-outlined">info</mat-icon>
+    <p>Не добавлено ни одного участника</p>
+  </app-empty-template>
+  }
+</div>

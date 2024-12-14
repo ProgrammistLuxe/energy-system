@@ -1,0 +1,46 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+@use '_tokens.scss' as tokens;
+$dark-theme: mat.define-theme(
+  (
+    color: (
+      theme-type: dark,
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+      use-system-variables: true,
+    ),
+    typography: (
+      use-system-variables: true,
+    ),
+  )
+);
+
+@include mat.core();
+
+@mixin dark-theme() {
+  @include mat.core-theme(
+    (
+      use-system-variables: true,
+    )
+  );
+  @include mat.all-component-themes(
+    (
+      use-system-variables: true,
+    )
+  );
+  @include mat.system-level-colors($dark-theme);
+  @include mat.system-level-typography($dark-theme);
+  @include mat.typography-hierarchy($dark-theme);
+}
+
+// :root {
+//   @include tokens.dark-theme();
+//   @include dark-theme();
+//   @include tokens.typography();
+//   @include tokens.system-static();
+// }
+.dark-theme {
+  @include dark-theme();
+  @include tokens.typography();
+  @include tokens.system-static();
+}

@@ -1,0 +1,149 @@
+<div
+  [class.hide]="loading"
+  class="wrapper">
+  <div class="container">
+    <div class="form-container">
+      <div
+        class="compact-form-field-area"
+        [formGroup]="form">
+        <mat-radio-group formControlName="is_active">
+          <mat-label>Статус:</mat-label>
+          <mat-radio-button [value]="true"> активен </mat-radio-button>
+          <mat-radio-button [value]="false"> не активен </mat-radio-button>
+        </mat-radio-group>
+
+        <mat-form-field
+          [subscriptSizing]="'dynamic'"
+          appearance="outline">
+          <mat-label>Фамилия</mat-label>
+          <input
+            formControlName="last_name"
+            maxlength="50"
+            autocomplete="off"
+            matInput />
+          <mat-error mat-error-ext></mat-error>
+        </mat-form-field>
+
+        <mat-form-field
+          [subscriptSizing]="'dynamic'"
+          appearance="outline">
+          <mat-label>Имя</mat-label>
+          <input
+            formControlName="first_name"
+            maxlength="50"
+            autocomplete="off"
+            matInput />
+          <mat-error mat-error-ext></mat-error>
+        </mat-form-field>
+
+        <mat-form-field
+          [subscriptSizing]="'dynamic'"
+          appearance="outline">
+          <mat-label>Отчество</mat-label>
+          <input
+            formControlName="middle_name"
+            maxlength="50"
+            autocomplete="off"
+            matInput />
+          <mat-error mat-error-ext></mat-error>
+        </mat-form-field>
+
+        <mat-form-field
+          [subscriptSizing]="'dynamic'"
+          appearance="outline">
+          <mat-label>Телефон</mat-label>
+          <input
+            formControlName="phone"
+            maxlength="25"
+            autocomplete="off"
+            matInput />
+          <mat-error mat-error-ext></mat-error>
+        </mat-form-field>
+
+        <mat-form-field
+          [subscriptSizing]="'dynamic'"
+          appearance="outline">
+          <mat-label>Почта</mat-label>
+          <input
+            formControlName="username"
+            maxlength="254"
+            autocomplete="off"
+            matInput />
+          <mat-error mat-error-ext></mat-error>
+        </mat-form-field>
+
+        <mat-form-field
+          [subscriptSizing]="'dynamic'"
+          appearance="outline">
+          <mat-label>Должность</mat-label>
+          <input
+            formControlName="job_title"
+            maxlength="255"
+            autocomplete="off"
+            matInput />
+          <mat-error mat-error-ext></mat-error>
+        </mat-form-field>
+
+        <!-- <mat-form-field
+          [subscriptSizing]="'dynamic'"
+          appearance="outline">
+          <mat-label>Структурное подразделение</mat-label>
+          <mat-select formControlName="appointment">
+            <mat-option
+              (click)="form.get('appointment')?.setValue(item.name)"
+              *ngFor="let item of null"
+              [value]="item.name"
+              >{{ item.name }}</mat-option
+            >
+          </mat-select>
+          <mat-error mat-error-ext></mat-error>
+        </mat-form-field> -->
+
+        <mat-form-field
+          [subscriptSizing]="'dynamic'"
+          appearance="outline">
+          <mat-label>Структурное подразделение</mat-label>
+          <input
+            formControlName="appointment"
+            maxlength="255"
+            autocomplete="off"
+            matInput />
+          <mat-error mat-error-ext></mat-error>
+        </mat-form-field>
+
+        <div class="role-list">
+          <mat-label>Роль</mat-label>
+          <mat-chip-listbox *ngIf="(user$ | async) && (user$ | async).groups?.length > 0; else noRoles">
+            <mat-chip
+              *ngFor="let group of (user$ | async).groups"
+              class="role-list-chip">
+              <div class="role-list-text">
+                {{ group.name }}
+              </div>
+            </mat-chip>
+          </mat-chip-listbox>
+          <ng-template #noRoles>
+            <mat-chip-listbox>
+              <mat-chip class="role-list-chip"> Группы прав не назначены! </mat-chip>
+            </mat-chip-listbox>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer class="footer">
+  <button
+    mat-flat-button
+    [disabled]="form.invalid"
+    [buttonLoading]="saveLoading"
+    (click)="save()">
+    Сохранить
+  </button>
+  <button
+    mat-button
+    (click)="back()">
+    Отменить
+  </button>
+</app-footer>
+<app-loading [loading]="loading"></app-loading>

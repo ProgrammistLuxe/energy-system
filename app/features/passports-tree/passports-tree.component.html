@@ -1,0 +1,130 @@
+<div
+  class="tree-container"
+  [class.expanding]="treeExpanding">
+  <div class="action-panel">
+    <app-search-field
+      class="search"
+      (search)="onSearchValueChanged($event)" />
+  </div>
+  <div
+    api-resolver
+    [errorCode]="errorCode"
+    [errorMessage]="errorMessage"
+    [loading]="initLoading"
+    (reload)="loadTree()"
+    class="tree">
+    <ng-container *ngIf="dataSource.data.length; else emptyTree">
+      <mat-tree
+        #treeSelector
+        [dataSource]="dataSource"
+        [treeControl]="treeControl">
+        <mat-tree-node
+          *matTreeNodeDef="let node"
+          matTreeNodePadding
+          [class.non-interactive]="!interactive"
+          [class.selected]="node.id === currentNode?.id"
+          [class.folder]="!node.selectable"
+          [id]="node.id"
+          class="tree-node"
+          (click)="selectNode(node)">
+          <div class="node-section">
+            <div class="toggle-section">
+              <button
+                mat-icon-button
+                matIconButtonCustom
+                [class.hidden]="!node.expandable"
+                [width]="24"
+                [height]="24"
+                [iconsSize]="20"
+                [attr.aria-label]="'Toggle ' + node.id"
+                matTreeNodeToggle>
+                <mat-icon
+                  [class.selected]="node.id === currentNode?.id"
+                  class="expand-icon">
+                  {{ treeControl.isExpanded(node) ? 'arrow_drop_down' : 'arrow_right' }}
+                </mat-icon>
+              </button>
+              <mat-icon
+                *ngIf="!node.selectable"
+                class="icon"
+                [class.selected]="node.id === currentNode?.id">
+                folder
+              </mat-icon>
+              <mat-icon
+                *ngIf="node.selectable"
+                [class.selected]="node.id === currentNode?.id"
+                class="icon">
+                description
+              </mat-icon>
+            </div>
+            <p
+              [class.selected]="node.id === currentNode?.id"
+              [overflowTooltip]="node.title"
+              class="title">
+              {{ node.title }}
+            </p>
+            <mat-spinner
+              *ngIf="node.loading"
+              diameter="20"></mat-spinner>
+          </div>
+        </mat-tree-node>
+        <mat-tree-node
+          *matTreeNodeDef="let node; when: hasChild"
+          matTreeNodePadding
+          [class.non-interactive]="!interactive"
+          [class.folder]="!node.selectable"
+          [class.selected]="node.id === currentNode?.id"
+          [id]="node.id"
+          class="tree-node"
+          (click)="selectNode(node)">
+          <div class="node-section">
+            <div class="toggle-section">
+              <button
+                mat-icon-button
+                matIconButtonCustom
+                [class.hidden]="!node.expandable"
+                [width]="24"
+                [height]="24"
+                [iconsSize]="20"
+                [attr.aria-label]="'Toggle ' + node.id"
+                matTreeNodeToggle>
+                <mat-icon
+                  [class.selected]="node.id === currentNode?.id"
+                  class="expand-icon">
+                  {{ treeControl.isExpanded(node) ? 'arrow_drop_down' : 'arrow_right' }}
+                </mat-icon>
+              </button>
+              <mat-icon
+                *ngIf="!node.selectable"
+                class="icon"
+                [class.selected]="node.id === currentNode?.id">
+                folder
+              </mat-icon>
+              <mat-icon
+                *ngIf="node.selectable"
+                [class.selected]="node.id === currentNode?.id"
+                class="icon">
+                description
+              </mat-icon>
+            </div>
+            <p
+              [class.selected]="node.id === currentNode?.id"
+              [overflowTooltip]="node.title"
+              class="title">
+              {{ node.title }}
+            </p>
+            <mat-spinner
+              *ngIf="node.loading"
+              diameter="20"></mat-spinner>
+          </div>
+        </mat-tree-node>
+      </mat-tree>
+    </ng-container>
+    <ng-template #emptyTree>
+      <app-empty-template>
+        <p>В дереве нет элементов</p>
+        <mat-icon>info</mat-icon>
+      </app-empty-template>
+    </ng-template>
+  </div>
+</div>

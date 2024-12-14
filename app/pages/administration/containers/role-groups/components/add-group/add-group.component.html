@@ -1,0 +1,27 @@
+<div class="add-group">
+  <div class="dialog-content-wrapper compact-form-field-area">
+    <mat-form-field
+      class="name"
+      appearance="outline">
+      <mat-label>Название</mat-label>
+      <input
+        [formControl]="nameControl"
+        matInput
+        type="text" />
+      <mat-error mat-error-ext></mat-error>
+    </mat-form-field>
+  </div>
+  <div class="button-block">
+    <button
+      mat-flat-button
+      [disabled]="nameControl.invalid"
+      (click)="addGroup()">
+      Добавить
+    </button>
+    <button
+      mat-button
+      [mat-dialog-close]="false">
+      Отменить
+    </button>
+  </div>
+</div>

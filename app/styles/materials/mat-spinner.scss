@@ -1,0 +1,10 @@
+.mat-mdc-progress-spinner {
+  circle {
+    stroke: var(--light-blue-bg) !important;
+  }
+}
+.button-loader.mdc-circular-progress--indeterminate {
+  circle {
+    stroke: var(--text-color) !important;
+  }
+}

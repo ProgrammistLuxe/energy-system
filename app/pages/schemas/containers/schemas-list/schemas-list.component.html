@@ -1,0 +1,22 @@
+<div
+  api-resolver
+  (reload)="loadSchemas()">
+  <div class="schemas">
+    @for (item of schemasList; track item) {
+    <div
+      class="schema-item"
+      [class.active]="selectedSchema?.uid === item.uid"
+      (click)="selectSchema(item)">
+      <p
+        [overflowTooltip]="item.name"
+        class="schema-name">
+        {{ item.name }}
+      </p>
+    </div>
+    } @empty {
+    <app-empty-template>
+      <p>Список пуст</p>
+    </app-empty-template>
+    }
+  </div>
+</div>

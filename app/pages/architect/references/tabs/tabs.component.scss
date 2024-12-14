@@ -1,0 +1,47 @@
+.container {
+  width: 100%;
+  height: 100%;
+}
+.header {
+  display: flex;
+  gap: 15px;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: 1px solid var(--divider);
+  padding: 10px 0 10px 15px;
+}
+.header-text {
+  margin: 0;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: calc(100% - 70px);
+}
+.nav-bar {
+  margin-bottom: 16px;
+  padding-left: 15px;
+}
+.tab-link {
+  min-height: 48px;
+  align-items: center;
+  max-width: 190px;
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+
+.badge {
+  margin-left: 12px;
+  font-weight: 400;
+}
+
+.tabs-wrapper {
+  width: 100%;
+  height: calc(100% - 64px);
+}

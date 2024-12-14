@@ -1,0 +1,45 @@
+<div class="integration-list-container">
+  <button
+    class="create-integration-btn"
+    mat-flat-button
+    (click)="openEditIntegrationSystemDialog()">
+    Создать интеграцию
+  </button>
+  <div
+    api-resolver
+    [loading]="loading"
+    [errorCode]="errorCode"
+    [errorMessage]="errorMessage"
+    (reload)="getIntegrationList()"
+    class="integration-list">
+    <div
+      *displayList="let integration of integrationList; empty: 'Список пуст'"
+      class="integration-list-item"
+      [class.selected]="integration.id === selectedIntegration?.id"
+      (click)="selectIntegration(integration)">
+      <p>{{ integration.name }}</p>
+      <div class="actions-block">
+        <button
+          mat-icon-button
+          matIconButtonCustom
+          matTooltip="Редактировать"
+          [width]="28"
+          [height]="28"
+          [iconsSize]="20"
+          (click)="$event.stopPropagation(); openEditIntegrationSystemDialog(integration)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          matIconButtonCustom
+          matTooltip="Удалить"
+          [width]="28"
+          [height]="28"
+          [iconsSize]="20"
+          (click)="$event.stopPropagation(); deleteIntegration(integration)">
+          <mat-icon>delete_forever</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

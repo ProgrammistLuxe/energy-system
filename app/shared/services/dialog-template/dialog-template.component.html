@@ -1,0 +1,13 @@
+<div class="dialog-container">
+  <div class="dialog-title">
+    <div
+      *ngIf="!dialogServiceConfig.hideCloseButton"
+      class="close-button">
+      <button [mat-dialog-close]="false">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <h1 class="title">{{ dialogServiceConfig.title ? dialogServiceConfig.title : '' }}</h1>
+  </div>
+  <ng-container #container></ng-container>
+</div>

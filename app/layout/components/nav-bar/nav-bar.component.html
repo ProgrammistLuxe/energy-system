@@ -1,0 +1,109 @@
+<div class="header">
+  <a
+    routerLink="references"
+    class="logo-text">
+    SofIT CIM Processor
+  </a>
+  <ng-container *ngIf="auth$ | async">
+    <div
+      #menuContainer
+      class="menu-container">
+      @for(item of menuItems;track item;let i= $index) { @if(item.isDropDown) {
+      <div
+        #navItems
+        [matMenuTriggerFor]="externalMenu"
+        [class.hidden]="i > lastVisibleItem"
+        class="menu-item">
+        <p class="menu-item-text">{{ item.name }}</p>
+        <mat-icon class="external-drop-icon"> keyboard_arrow_down </mat-icon>
+      </div>
+      <mat-menu
+        #externalMenu="matMenu"
+        xPosition="before"
+        class="hidden-menu">
+        <div class="menu-dropdown">
+          @for(item of menuItemsExternal;track item;let i= $index) {
+          <a
+            [href]="item.link"
+            target="_blank"
+            class="menu-item">
+            <p class="menu-item-text">{{ item.name }}</p>
+          </a>
+          }
+        </div>
+      </mat-menu>
+      } @else {
+      <a
+        #navItems
+        routerLink="{{ item.link }}"
+        routerLinkActive="active"
+        [class.hidden]="i > lastVisibleItem"
+        class="menu-item">
+        <p class="menu-item-text">{{ item.name }}</p>
+      </a>
+      } }
+    </div>
+    <ng-container *ngIf="hiddenMenu.length">
+      <mat-icon
+        class="open-dropdown-icon"
+        [fontSet]="'material-icons-outlined'"
+        [matMenuTriggerFor]="dropdownMenu"
+        >expand_circle_down</mat-icon
+      >
+
+      <mat-menu
+        #dropdownMenu="matMenu"
+        xPosition="before"
+        class="hidden-menu">
+        <div class="menu-dropdown">
+          @for(item of hiddenMenu;track item) { @if(item.isDropDown) {
+          <div
+            #navItems
+            (click)="$event.stopPropagation()"
+            [matMenuTriggerFor]="externalMenu"
+            class="menu-item">
+            <p class="menu-item-text">{{ item.name }}</p>
+            <mat-icon class="external-drop-icon"> keyboard_arrow_down </mat-icon>
+          </div>
+          <mat-menu
+            #externalMenu="matMenu"
+            xPosition="before"
+            class="hidden-menu">
+            <div class="menu-dropdown">
+              @for(item of menuItemsExternal;track item;let i= $index) {
+              <a
+                [href]="item.link"
+                target="_blank"
+                class="menu-item">
+                <p class="menu-item-text">{{ item.name }}</p>
+              </a>
+              }
+            </div>
+          </mat-menu>
+          } @else {
+          <a
+            #navItems
+            routerLink="{{ item.link }}"
+            routerLinkActive="active"
+            class="menu-item">
+            <p class="menu-item-text">{{ item.name }}</p>
+          </a>
+          } }
+        </div>
+      </mat-menu>
+    </ng-container>
+    <button
+      matTooltip="Открыть глобальный поиск"
+      mat-icon-button
+      matIconButtonCustom
+      [isIconButton]="true"
+      [buttonLoading]="fileLoading"
+      [width]="35"
+      [height]="35"
+      [iconsSize]="25"
+      (click)="openGlobalSearchDialog()">
+      <mat-icon>search</mat-icon>
+    </button>
+    <app-profile class="profile" />
+  </ng-container>
+</div>

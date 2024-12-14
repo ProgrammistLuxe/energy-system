@@ -1,0 +1,20 @@
+<div class="form">
+  <div class="dialog-content-wrapper">
+    <input
+      type="file"
+      (change)="handleFileSelect($event)" />
+  </div>
+  <div class="button-block">
+    <button
+      mat-flat-button
+      [disabled]="!jsonLd.length"
+      (click)="draw()">
+      Нарисовать
+    </button>
+    <button
+      mat-button
+      [mat-dialog-close]="false">
+      Отменить
+    </button>
+  </div>
+</div>

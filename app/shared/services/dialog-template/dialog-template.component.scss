@@ -1,0 +1,49 @@
+:host {
+  display: block;
+  min-width: 350px;
+}
+
+.close-button {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+
+  button {
+    background: inherit;
+    border: 0;
+    cursor: pointer;
+    padding: 0;
+    color: var(--secondary-text);
+  }
+}
+
+.close-button:hover {
+  button {
+    color: initial;
+  }
+}
+
+.dialog-container {
+  padding: 40px 30px;
+  height: 100%;
+}
+
+.dialog-content {
+  padding: 0 20px;
+}
+
+.dialog-title {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 18px;
+  margin: 0;
+  padding: 0;
+}
+
+.title::before {
+  height: 0;
+}

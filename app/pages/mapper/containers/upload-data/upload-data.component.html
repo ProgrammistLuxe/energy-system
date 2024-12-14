@@ -1,0 +1,89 @@
+<app-breadcrumbs name="Загрузить данные" />
+<div
+  api-resolver
+  [errorCode]="errorCode"
+  [errorMessage]="errorMessage"
+  [loading]="loading"
+  class="container"
+  (reload)="getIntegrationList()">
+  <mat-chip-listbox class="tabs-list">
+    <mat-chip-option
+      #chip
+      [selected]="mode === 'add'"
+      [selectable]="!chip.selected"
+      class="chip"
+      (click)="changeMode('add')"
+      >Загрузить данные с файла</mat-chip-option
+    >
+    <mat-chip-option
+      #chip
+      [selected]="mode === 'edit'"
+      [selectable]="!chip.selected"
+      class="chip"
+      (click)="changeMode('edit')"
+      >Обновить атрибут даннымии с файла
+    </mat-chip-option>
+  </mat-chip-listbox>
+  <div
+    [formGroup]="form"
+    class="upload-data-container">
+    <mat-form-field appearance="outline">
+      <mat-label>Выберите интеграцию</mat-label>
+      <mat-select formControlName="integration">
+        @for (item of integrationList; track item) {
+        <mat-option [value]="item">
+          {{ item.name }}
+        </mat-option>
+        }
+      </mat-select>
+      <mat-error mat-error-ext />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Выберите тип данных</mat-label>
+      <mat-select formControlName="classType">
+        @for (item of classTypesList; track item) {
+        <mat-option [value]="item">
+          {{ item.name }}
+        </mat-option>
+        }
+      </mat-select>
+      <mat-error mat-error-ext />
+    </mat-form-field>
+    @if (mode === 'edit') {
+    <mat-form-field appearance="outline">
+      <mat-label>Выберите атрибут</mat-label>
+      <mat-select formControlName="update_attribute_id">
+        @for (item of attrList$ | async; track item) {
+        <mat-option [value]="item.id">
+          {{ item.name }}
+        </mat-option>
+        }
+      </mat-select>
+      <mat-error mat-error-ext />
+    </mat-form-field>
+    }
+    <mat-form-field appearance="outline">
+      <mat-label>Выберите файл</mat-label>
+      <app-file-select-control
+        formControlName="file"
+        [accept]="'.xlsx'"
+        [multiple]="false" />
+      <clear-field-button matIconSuffix />
+      <mat-error mat-error-ext />
+    </mat-form-field>
+    <div class="button-block">
+      <button
+        [disabled]="form.invalid || saveLoading"
+        [buttonLoading]="saveLoading"
+        mat-flat-button
+        (click)="uploadData()">
+        Загрузить
+      </button>
+      <button
+        (click)="form.reset()"
+        mat-button>
+        Отменить
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="snackbar">
+  <mat-icon
+    class="close-icon icon"
+    [ngClass]="{
+      error: type === 'error',
+      success: type === 'success',
+      info: type === 'info'
+    }"
+    (click)="snackBarRef.dismiss()"
+    >close</mat-icon
+  >
+  <div class="snackbar-container">
+    <div
+      [ngClass]="{
+        error: type === 'error',
+        success: type === 'success',
+        info: type === 'info'
+      }"
+      class="icon-block">
+      <div class="icon-wrapper">
+        <mat-icon
+          [ngClass]="{
+            error: type === 'error',
+            success: type === 'success',
+            info: type === 'info'
+          }"
+          fontSet="material-symbols-outlined"
+          class="icon icon-status">
+          {{ iconType }}
+        </mat-icon>
+      </div>
+    </div>
+    <div class="snackbar-content">
+      <h2
+        [ngClass]="{
+          error: type === 'error',
+          success: type === 'success',
+          info: type === 'info'
+        }"
+        class="header">
+        {{ header || '' }}
+      </h2>
+      <div class="message-text">
+        {{ message || '' }}
+      </div>
+    </div>
+  </div>
+</div>

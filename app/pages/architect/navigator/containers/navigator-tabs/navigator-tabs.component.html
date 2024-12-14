@@ -1,0 +1,32 @@
+<div class="container">
+  <nav
+    mat-tab-nav-bar
+    [tabPanel]="tabPanel"
+    class="nav-bar">
+    <a
+      mat-tab-link
+      routerLink="edit"
+      routerLinkActive
+      #rla1="routerLinkActive"
+      queryParamsHandling="merge"
+      [active]="rla1.isActive"
+      class="tab-link">
+      Редактирование объекта
+    </a>
+    <a
+      mat-tab-link
+      routerLink="graph-view"
+      routerLinkActive
+      #rla2="routerLinkActive"
+      queryParamsHandling="merge"
+      [active]="rla2.isActive"
+      class="tab-link">
+      Графическое отображение
+    </a>
+  </nav>
+  <mat-tab-nav-panel
+    #tabPanel
+    class="tabs-wrapper">
+    <router-outlet></router-outlet>
+  </mat-tab-nav-panel>
+</div>

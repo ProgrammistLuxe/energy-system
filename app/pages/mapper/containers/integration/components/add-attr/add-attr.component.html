@@ -1,0 +1,53 @@
+<mat-form-field
+  class="name"
+  appearance="outline">
+  <mat-label>Участник интеграции</mat-label>
+  <mat-select
+    [(ngModel)]="selectedParticipant"
+    [disabled]="data.mode === 'edit'">
+    @for (participant of data.participants; track participant) {
+    <mat-option [value]="participant">{{ participant.name }}</mat-option>
+    }
+  </mat-select>
+  <mat-error mat-error-ext></mat-error>
+</mat-form-field>
+<div [formGroup]="form">
+  <mat-form-field
+    class="name"
+    appearance="outline">
+    <mat-label>Название атрибута</mat-label>
+    <input
+      formControlName="name"
+      maxlength="255"
+      matInput
+      type="text" />
+    <mat-error mat-error-ext></mat-error>
+  </mat-form-field>
+  <mat-form-field
+    class="name"
+    appearance="outline">
+    <mat-label>Тип атрибута</mat-label>
+    <mat-select formControlName="type">
+      @for (type of attrTypeList$ | async; track type) {
+      <mat-option [value]="type">{{ type }}</mat-option>
+      }
+    </mat-select>
+    <mat-error mat-error-ext></mat-error>
+  </mat-form-field>
+  <div class="button-block">
+    <button
+      mat-flat-button
+      [disabled]="form.invalid || !selectedParticipant || saveLoading"
+      [buttonLoading]="saveLoading"
+      class="small"
+      (click)="editAttr()">
+      {{ data.mode === 'edit' ? 'Обновить' : 'Добавить' }}
+    </button>
+    <button
+      mat-button
+      [mat-dialog-close]="false"
+      class="small">
+      Отменить
+    </button>
+  </div>
+</div>

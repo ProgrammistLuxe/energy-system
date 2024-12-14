@@ -1,0 +1,117 @@
+.menu {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 8px 0 16px 24px;
+  height: 48px;
+}
+
+.left-menu {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.search-field {
+  margin-top: 4px;
+}
+
+.right-menu {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.action-btn {
+  height: 32px !important;
+}
+
+.div-button {
+  display: flex;
+  align-items: center;
+  height: 32px;
+  padding: 0 8px 0 8px;
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  border-radius: 4px;
+  justify-content: center;
+  cursor: pointer;
+  mat-icon {
+    margin: 0 4px;
+  }
+}
+
+.div-button-light {
+  display: flex;
+  align-items: center;
+  height: 32px;
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  line-height: normal;
+  border-radius: 4px;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0 16px 0 8px;
+  background-color: var(--light-blue-bg);
+  color: var(--text-white);
+  font-weight: 600;
+  &:hover {
+    background-color: var(--light-blue-bg-lighten);
+  }
+  .mat-icon {
+    margin: 0 4px;
+  }
+}
+
+.div-button-grey {
+  display: flex;
+  align-items: center;
+  height: 32px;
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  border-radius: 4px;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0 4px 0 16px;
+  background-color: var(--bg-gray);
+  color: var(--text-color-grey);
+  &:hover {
+    background-color: var(--element-hover);
+  }
+  .mat-icon {
+    margin: 0 4px;
+  }
+}
+
+.div-button-grey-blue {
+  display: flex;
+  align-items: center;
+  height: 32px;
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  border-radius: 4px;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0 16px 0 8px;
+  background-color: var(--bg-gray);
+  color: var(--text-color-light);
+  &:hover {
+    background-color: var(--element-hover);
+  }
+  .mat-icon {
+    margin: 0 4px;
+  }
+}

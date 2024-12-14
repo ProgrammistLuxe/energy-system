@@ -1,0 +1,27 @@
+<div class=".line-span-action">
+  <div class="dialog-content-wrapper compact-form-field-area">
+    <mat-form-field
+      class="name"
+      appearance="outline">
+      <mat-label>Действие с пролетом</mat-label>
+      <mat-select [formControl]="actionControl">
+        <mat-option value="createNewACLine">Создать новый сегмент</mat-option>
+        <mat-option value="addToOldACLine">Добавить пролет к существующему сегменту</mat-option>
+      </mat-select>
+      <mat-error mat-error-ext></mat-error>
+    </mat-form-field>
+  </div>
+  <div class="button-block">
+    <button
+      mat-flat-button
+      [disabled]="actionControl.invalid"
+      (click)="selectAction()">
+      Добавить
+    </button>
+    <button
+      mat-button
+      [mat-dialog-close]="false">
+      Отменить
+    </button>
+  </div>
+</div>

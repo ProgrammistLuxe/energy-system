@@ -1,0 +1,47 @@
+<ng-container *ngIf="!loading">
+  <div class="employees-workspace">
+    <div class="selected-employees">
+      <h2 class="header">Выбранные сотрудники</h2>
+      <div
+        [appCheckScroll]
+        class="selected-employees-container">
+        <app-list-item-remove
+          *displayList="let employee of selectedEmployees; empty: 'Список пуст'"
+          [name]="employee.username"
+          class="employee"
+          (clicked)="unSelectEmployee(employee)" />
+      </div>
+    </div>
+    <mat-divider
+      vertical
+      class="divider"></mat-divider>
+    <div class="all-employees">
+      <h2 class="header">Все сотрудники</h2>
+      <div class="search-field">
+        <app-search-field (search)="onSearchEmployeesValueChanged($event)" />
+      </div>
+      <div class="all-employees-container">
+        <app-list-item-add
+          *displayList="let employee of filteredAllEmployees; empty: 'Список пуст'"
+          [name]="employee.username"
+          class="employee"
+          (clicked)="selectEmployee(employee)" />
+      </div>
+    </div>
+    <app-loading [loading]="loading"></app-loading>
+  </div>
+  <app-footer class="footer">
+    <button
+      mat-flat-button
+      [buttonLoading]="saveLoading"
+      (click)="saveData()">
+      Сохранить
+    </button>
+    <button
+      mat-button
+      (click)="getData()">
+      Отменить
+    </button>
+  </app-footer>
+</ng-container>
+<app-loading [loading]="loading"></app-loading>

@@ -1,0 +1,44 @@
+<div class="edit-prefix">
+  <div
+    [formGroup]="form"
+    class="dialog-content-wrapper compact-form-field-area">
+    <mat-form-field appearance="outline">
+      <mat-label>Полное название</mat-label>
+      <input
+        formControlName="full_name"
+        matInput
+        type="text" />
+      <mat-error mat-error-ext></mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Сокращенное название</mat-label>
+      <input
+        formControlName="short_name"
+        matInput
+        type="text" />
+      <mat-error mat-error-ext></mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Описание</mat-label>
+      <input
+        formControlName="description"
+        matInput
+        type="text" />
+      <mat-error mat-error-ext></mat-error>
+    </mat-form-field>
+  </div>
+  <div class="button-block">
+    <button
+      mat-flat-button
+      [buttonLoading]="saveLoading"
+      [disabled]="form.invalid"
+      (click)="editPrefix()">
+      Редактировать
+    </button>
+    <button
+      mat-button
+      [mat-dialog-close]="false">
+      Отменить
+    </button>
+  </div>
+</div>

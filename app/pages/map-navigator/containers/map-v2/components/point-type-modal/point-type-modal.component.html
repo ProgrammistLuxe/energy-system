@@ -1,0 +1,28 @@
+<div class="point-type">
+  <div class="dialog-content-wrapper compact-form-field-area">
+    <mat-form-field
+      class="name"
+      appearance="outline">
+      <mat-label>Тип точки</mat-label>
+      <mat-select [formControl]="typeControl">
+        <mat-option value="grndTower">Точка поворота кабеля</mat-option>
+        <mat-option value="Tower">Воздушная опора</mat-option>
+        <mat-option value="Substation">Подстанция</mat-option>
+      </mat-select>
+      <mat-error mat-error-ext></mat-error>
+    </mat-form-field>
+  </div>
+  <div class="button-block">
+    <button
+      mat-flat-button
+      [disabled]="typeControl.invalid"
+      (click)="selectType()">
+      Добавить
+    </button>
+    <button
+      mat-button
+      [mat-dialog-close]="false">
+      Отменить
+    </button>
+  </div>
+</div>

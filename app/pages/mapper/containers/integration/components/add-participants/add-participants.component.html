@@ -1,0 +1,35 @@
+<div
+  api-resolver
+  [loading]="loading"
+  [errorCode]="errorCode"
+  [errorMessage]="errorMessage"
+  (reload)="getParticipantList()">
+  <mat-form-field
+    class="name"
+    appearance="outline">
+    <mat-label>Системы</mat-label>
+    <mat-select
+      multiple
+      [formControl]="participantsControl">
+      @for (participant of participantList; track participant) {
+      <mat-option [value]="participant.id">{{ participant.name }}</mat-option>
+      }
+    </mat-select>
+    <mat-error mat-error-ext></mat-error>
+  </mat-form-field>
+  <div class="button-block">
+    <button
+      mat-flat-button
+      [disabled]="participantsControl.invalid || saveLoading"
+      [buttonLoading]="saveLoading"
+      (click)="addParticipant()">
+      Добавить участников
+    </button>
+    <button
+      mat-button
+      [mat-dialog-close]="false"
+      class="small">
+      Отменить
+    </button>
+  </div>
+</div>

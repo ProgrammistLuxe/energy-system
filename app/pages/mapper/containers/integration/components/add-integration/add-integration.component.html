@@ -1,0 +1,29 @@
+<div>
+  <mat-form-field
+    class="name"
+    appearance="outline">
+    <mat-label>Название интеграции</mat-label>
+    <input
+      [formControl]="nameControl"
+      maxlength="255"
+      matInput
+      type="text" />
+    <mat-error mat-error-ext></mat-error>
+  </mat-form-field>
+  <div class="button-block">
+    <button
+      mat-flat-button
+      [disabled]="nameControl.invalid || saveLoading"
+      [buttonLoading]="saveLoading"
+      class="small"
+      (click)="editIntegration()">
+      {{ data.mode === 'edit' ? 'Обновить' : 'Добавить' }}
+    </button>
+    <button
+      mat-button
+      [mat-dialog-close]="false"
+      class="small">
+      Отменить
+    </button>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="attrs-table">
+  <table
+    mat-table
+    multiTemplateDataRows
+    [dataSource]="attrsTableData"
+    class="table">
+    @for (column of displayedColumns; let i = $index; track column) {
+    <ng-container [matColumnDef]="column">
+      <th
+        mat-header-cell
+        *matHeaderCellDef>
+        {{ column }}
+      </th>
+
+      <td
+        *matCellDef="let element"
+        mat-cell>
+        <div class="cell-content">
+          <mat-checkbox
+            [checked]="filteredAttrs | activeAttr: element[column]"
+            (change)="checkedChange($event, element[column])"></mat-checkbox>
+          <p>{{ element[column]?.name | default }}</p>
+        </div>
+      </td>
+    </ng-container>
+    }
+    <tr
+      *matHeaderRowDef="displayedColumns; sticky: true"
+      mat-header-row></tr>
+    <tr
+      *matRowDef="let row; columns: displayedColumns"
+      mat-row></tr>
+  </table>
+</div>
+<div class="button-block">
+  <button
+    mat-flat-button
+    class="small"
+    (click)="applyFilter()">
+    Применить
+  </button>
+  <button
+    mat-button
+    (click)="cancelFilers()"
+    class="small">
+    Отменить
+  </button>
+</div>

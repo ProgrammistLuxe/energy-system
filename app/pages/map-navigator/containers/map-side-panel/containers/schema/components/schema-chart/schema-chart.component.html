@@ -1,0 +1,25 @@
+<!-- <app-panel-tool (selectedElementChanged)="selectedElementChanged($event)" /> -->
+<app-action-bar
+  [class.hidden]="loading"
+  (clearGraph)="clearGraph()"
+  (exportPng)="exportPng()"
+  (exportPdf)="exportPdf()"
+  (exportSvg)="exportSvg()" />
+<div
+  [class.hidden]="loading"
+  class="paper-wrapper"
+  tabindex="0"
+  #paperWrapper>
+  <div
+    class="canvas"
+    id="canvas"
+    #canvas></div>
+</div>
+<app-schemas-footer
+  [class.hidden]="loading"
+  [scale]="scale"
+  [minScale]="minScale"
+  [maxScale]="maxScale"
+  (zoomChanged)="scaleChanged($event)"
+  (fullScreenToggle)="fullScreenToggle()" />
+<app-loading [loading]="loading" />

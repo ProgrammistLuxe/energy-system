@@ -1,0 +1,146 @@
+<div class="entity-form">
+  <div
+    api-resolver
+    [errorCode]="errorCode"
+    [errorMessage]="errorMessage"
+    [loading]="loading"
+    (reload)="getFormData()"
+    class="dialog-content-wrapper">
+    <div class="actions">
+      <app-search-field
+        class="search-attrs"
+        [resetValue]="resetSearchValue"
+        (search)="updateSearchValue($event)" />
+      <div class="filter-fields">
+        <p class="toggle-filter-text">Отобразить:</p>
+        <mat-button-toggle-group
+          class="toggle-filter"
+          value="all"
+          (valueChange)="updateFilterValue($event)"
+          aria-label="Favorite Color">
+          <mat-button-toggle value="all">Все</mat-button-toggle>
+          <mat-button-toggle value="filled">Только заполненные</mat-button-toggle>
+          <mat-button-toggle value="empty">Только незаполненные</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    </div>
+    @if(filteredFormFields.length) {
+    <div
+      class="form compact-form-field-area"
+      [appCheckScroll]
+      [formGroup]="form">
+      @for(field of filteredFormFields; track field) { @switch (field.type) { @case ('string') {
+      <mat-form-field appearance="outline">
+        <mat-label
+          [overflowTooltip]="field.label"
+          class="form-label"
+          >{{ field.label }}</mat-label
+        >
+        <input
+          [formControlName]="field.key"
+          matInput
+          type="text" />
+        <mat-error mat-error-ext />
+      </mat-form-field>
+      } @case ('number') {
+      <mat-form-field appearance="outline">
+        <mat-label
+          [overflowTooltip]="field.label"
+          class="form-label"
+          >{{ field.label }}</mat-label
+        >
+        <input
+          [formControlName]="field.key"
+          matInput
+          type="number" />
+        <mat-error mat-error-ext />
+      </mat-form-field>
+      } @case ('class') { @if(field.library) {
+      <mat-form-field appearance="outline">
+        <mat-label
+          [overflowTooltip]="field.label"
+          class="form-label"
+          >{{ field.label }}</mat-label
+        >
+        <mat-select
+          (openedChange)="selectOptionsData(field, $event)"
+          [multiple]="field.isMulti"
+          [formControlName]="field.key">
+          <div class="select-search">
+            <app-search-field (search)="searchOptions(field, $event)"></app-search-field>
+          </div>
+          @if(listLoading) {
+          <mat-option disabled><mat-spinner [diameter]="20"></mat-spinner> </mat-option>
+          } @else {
+          <div class="options-container">
+            @if(field.data.length) { @for(item of field.data; track item) {
+            <mat-option [value]="item.uid">{{ item.value | default }}</mat-option>
+            } } @else {
+            <mat-option
+              disabled
+              [value]=""
+              >Список пуст</mat-option
+            >
+            }
+          </div>
+          }
+        </mat-select>
+        <mat-error mat-error-ext />
+      </mat-form-field>
+      } @else {
+      <mat-form-field appearance="outline">
+        <mat-label
+          [overflowTooltip]="field.label"
+          class="form-label"
+          >{{ field.label }}</mat-label
+        >
+        <app-tree-control
+          [initialSelectedNodes]="field.data"
+          [formControl]="field.key | getControl: form"
+          [class_name]="field.class_name"
+          [singleSelection]="!field.isMulti" />
+        <mat-error mat-error-ext />
+      </mat-form-field>
+      } } @case ('boolean') {
+      <mat-checkbox [formControlName]="field.key">{{ field.label }}</mat-checkbox>
+      } @default {
+      <mat-form-field appearance="outline">
+        <mat-label
+          [overflowTooltip]="field.label"
+          class="form-label"
+          >{{ field.label }}</mat-label
+        >
+        <input
+          [formControlName]="field.key"
+          matInput
+          type="text" />
+        <mat-error mat-error-ext />
+      </mat-form-field>
+      } } }
+    </div>
+    } @else {
+    <app-empty-template class="empty-template">
+      <p>Нет полей для добавления</p>
+      <mat-icon
+        class="material-symbols-outlined"
+        fontSize="material-icons-outlined"
+        >info</mat-icon
+      >
+    </app-empty-template>
+    }
+  </div>
+  <div class="button-block">
+    <button
+      mat-flat-button
+      [disabled]="form.invalid"
+      [buttonLoading]="saveLoading"
+      (click)="createEntity()">
+      Создать
+    </button>
+    <button
+      mat-button
+      [mat-dialog-close]="false">
+      Отменить
+    </button>
+  </div>
+</div>

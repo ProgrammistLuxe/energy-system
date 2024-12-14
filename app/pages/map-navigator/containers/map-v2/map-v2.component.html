@@ -1,0 +1,84 @@
+<div
+  api-resolver
+  [errorCode]="errorCode"
+  [errorMessage]="errorMessage"
+  [loading]="loading"
+  (reload)="getGeoJsonV2()"
+  class="map-container">
+  <div
+    class="map"
+    [class.loading]="treeExpanding"
+    leaflet
+    [leafletOptions]="options"
+    (leafletMapReady)="onMapReady($event)">
+    <div class="latlng-control">
+      <p class="latlng-text">Широта: {{ currentLatLng.lat.toFixed(COORDS_ROUNDING_VALUE) }}</p>
+      <p class="latlng-text">Долгота: {{ currentLatLng.lng.toFixed(COORDS_ROUNDING_VALUE) }}</p>
+    </div>
+    <div
+      [class.loading]="treeExpanding"
+      class="map-search">
+      <app-search-field (search)="searchValue = $event"></app-search-field>
+      <button
+        mat-flat-button
+        (click)="searchOnMap()">
+        Найти
+      </button>
+    </div>
+    <div class="map-options">
+      <h3 class="options-title">Настройки отображения</h3>
+      <div class="options-select">
+        <mat-form-field
+          appearance="outline"
+          subscriptSizing="dynamic"
+          class="select-mode-field">
+          <mat-label> Выбрать подложку </mat-label>
+          <mat-select
+            [value]="activeLayer"
+            (valueChange)="changeMapLayer($event)">
+            @for(layer of layers; track layer) {
+            <mat-option [value]="layer">{{ layer.name }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="options-select">
+        <mat-form-field
+          appearance="outline"
+          subscriptSizing="dynamic"
+          class="select-mode-field">
+          <mat-label> Активные слои </mat-label>
+          <mat-select
+            multiple
+            [value]="activeTileLayers">
+            @for(layer of tileLayers; track layer) {
+            <mat-option
+              (onSelectionChange)="changeActiveTileLayers($event)"
+              [value]="layer"
+              >{{ layer | tileLayerName }}</mat-option
+            >
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <!-- <div class="mode-select">
+        <mat-form-field
+          appearance="outline"
+          subscriptSizing="dynamic"
+          class="select-mode-field">
+          <mat-label> Режим работы </mat-label>
+          <mat-select
+            value="view"
+            (valueChange)="changeMode($event)">
+            <mat-option [value]="'view'">Просмотр</mat-option>
+            <mat-option [value]="'edit'">Редактирование</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      @if(mode === 'edit') {
+      <app-map-edit-action (actionChanged)="changeAction($event)" />
+      } -->
+    </div>
+  </div>
+  <app-map-side-panel (panelStateChanged)="panelStateChanged()" />
+</div>

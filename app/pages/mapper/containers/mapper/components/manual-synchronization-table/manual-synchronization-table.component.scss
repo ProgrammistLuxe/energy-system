@@ -1,0 +1,60 @@
+.cell-content {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+.sync-objects-table {
+  position: relative;
+  height: calc(100% - 64px);
+  width: 100%;
+  overflow: auto;
+}
+.table {
+  width: 100%;
+  min-width: 0;
+  background-color: inherit;
+  .group-header-cell {
+    color: var(--table-head-text);
+    background-color: var(--table-head-background);
+  }
+  tr.mat-mdc-header-row {
+    font-size: 10px;
+    height: 40px;
+  }
+
+  tr.mat-mdc-row {
+    height: 36px;
+  }
+  th {
+    font-family: Inter, sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    background-color: var(--layer);
+  }
+  td {
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    color: var(--text-color);
+    height: 36px;
+    background-color: inherit;
+    padding: 0 10px !important;
+  }
+  th.mat-mdc-header-cell,
+  td.mat-mdc-cell {
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  th,
+  td {
+    &:not(:last-child) {
+      border-right: 1px solid var(--divider);
+    }
+    border-bottom: 1px solid var(--divider) !important;
+  }
+}

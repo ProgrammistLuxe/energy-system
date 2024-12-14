@@ -1,0 +1,113 @@
+<div class="sync-objects-container">
+  @if (integrationParticipantList.length) {
+  <app-action-panel>
+    <p>Таблица включённых атрибутов</p>
+    <button
+      class="small"
+      [disabled]="!selectedClassType || !attrList.length"
+      (click)="openFilterDialog()"
+      mat-flat-button>
+      Настройки
+    </button>
+    <mat-form-field
+      appearance="outline"
+      subscriptSizing="dynamic">
+      <mat-label>Выберите тип данных</mat-label>
+      <mat-select
+        [value]="selectedClassType"
+        (valueChange)="setSelectedType($event)">
+        @for (classType of classTypeList; track classType) {
+        <mat-option [value]="classType">{{ classType.name }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    <app-search-field
+      class="search"
+      (search)="onSearchValueChanged($event)" />
+  </app-action-panel>
+  @if (selectedClassType) {
+  <div class="sync-objects-content">
+    <div
+      api-resolver
+      [loading]="loading"
+      [errorCode]="errorCode"
+      [errorMessage]="errorMessage"
+      (reload)="loadData()"
+      class="sync-objects-table">
+      @if (tableData.length) {
+      <table
+        mat-table
+        multiTemplateDataRows
+        [dataSource]="filteredTableData"
+        class="table">
+        @for (groupColumn of groupDisplayedColumns; track groupColumn) {
+        <ng-container [matColumnDef]="groupColumn">
+          <th
+            class="group-header-cell"
+            [attr.colspan]="columnsToShow[groupColumn].length"
+            mat-header-cell
+            *matHeaderCellDef>
+            {{ groupColumn }}
+          </th>
+        </ng-container>
+        @for (column of columnsToShow[groupColumn]; track column) {
+        <ng-container [matColumnDef]="column">
+          <th
+            mat-header-cell
+            *matHeaderCellDef>
+            {{ column | getColumnName: groupColumn }}
+          </th>
+
+          <td
+            *matCellDef="let element"
+            mat-cell>
+            <div
+              [overflowTooltip]="element.data[groupColumn]?.[column]?.value"
+              class="cell-content">
+              {{ element.data[groupColumn]?.[column]?.value | default }}
+            </div>
+          </td>
+        </ng-container>
+        } }
+
+        <tr
+          mat-header-row
+          *matHeaderRowDef="groupDisplayedColumns; sticky: true"></tr>
+        <tr
+          *matHeaderRowDef="displayedColumns; sticky: true"
+          mat-header-row></tr>
+        <tr
+          *matRowDef="let row; columns: displayedColumns"
+          class="sync-object"
+          (click)="addToMapping(row)"
+          mat-row></tr>
+      </table>
+      } @else {
+      <app-empty-template>
+        <mat-icon fontSize="material-icons-outlined">info</mat-icon>
+        <p>Нет данных</p>
+      </app-empty-template>
+      }
+    </div>
+    <app-manual-synchronization-table
+      [displayedColumns]="displayedColumns"
+      [groupDisplayedColumns]="groupDisplayedColumns"
+      [mappingTableData]="mappingTableData"
+      [columnsToShow]="columnsToShow"
+      [saveLoading]="saveLoading"
+      (desync)="desync()"
+      (synchronize)="synchronize()"
+      (reset)="reset()" />
+  </div>
+  } @else {
+  <app-empty-template>
+    <mat-icon fontSize="material-icons-outlined">info</mat-icon>
+    <p>Выберите тип данных</p>
+  </app-empty-template>
+  } } @else {
+  <app-empty-template>
+    <mat-icon fontSize="material-icons-outlined">info</mat-icon>
+    <p>Не добавлено ни одного участника</p>
+  </app-empty-template>
+  }
+</div>

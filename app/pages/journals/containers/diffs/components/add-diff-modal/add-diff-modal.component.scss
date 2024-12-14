@@ -1,0 +1,25 @@
+.diff-form {
+  background-color: var(--side-panel-bg);
+}
+
+.button-block {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.file-input {
+  max-height: 48px;
+  overflow: auto;
+}
+
+.clear-btn {
+  margin-right: 10px;
+}
+
+.mat-mdc-form-field {
+  width: 100%;
+}

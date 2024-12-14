@@ -1,0 +1,12 @@
+<div
+  *ngIf="errors$ | async as errors"
+  class="error-text">
+  <span class="text">{{ errors[0] }}</span>
+  <mat-icon
+    class="icon"
+    color="warn"
+    *ngIf="errors.length > 1"
+    [matTooltip]="errors | stringJoin"
+    >info</mat-icon
+  >
+</div>

@@ -1,0 +1,89 @@
+<div class="pagination-container">
+  <div class="actions-header">
+    <div
+      [formGroup]="filtersForm"
+      class="compact-form-field-area filters">
+      <mat-form-field
+        appearance="fill"
+        subscriptSizing="dynamic">
+        <mat-label>Выберите вид записи</mat-label>
+        <mat-select formControlName="level">
+          <mat-option>-</mat-option>
+          <mat-option
+            *ngFor="let level of levelsList$ | async"
+            [value]="level"
+            >{{ level }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field
+        appearance="fill"
+        subscriptSizing="dynamic">
+        <mat-label>Выберите источник</mat-label>
+        <mat-select formControlName="source">
+          <mat-option>-</mat-option>
+          <mat-option
+            *ngFor="let source of sourcesList$ | async"
+            [value]="source"
+            >{{ source }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field
+        appearance="fill"
+        subscriptSizing="dynamic">
+        <mat-label>Выберите журнал</mat-label>
+        <mat-select formControlName="journal_name">
+          <mat-option>-</mat-option>
+          <mat-option
+            *ngFor="let journal of journalsList$ | async"
+            [value]="journal"
+            >{{ journal }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field
+        class="date-control"
+        appearance="fill"
+        subscriptSizing="dynamic">
+        <mat-label>Выберите период</mat-label>
+        <app-date-range-control formControlName="date"></app-date-range-control>
+        <mat-datepicker-toggle matSuffix></mat-datepicker-toggle>
+      </mat-form-field>
+      <button
+        mat-flat-button
+        (click)="resetFilters()">
+        Сбросить фильтры
+      </button>
+      <button
+        mat-flat-button
+        (click)="applyFilters()">
+        Применить фильтры
+      </button>
+    </div>
+  </div>
+  <div
+    api-resolver
+    [errorCode]="errorCode"
+    [errorMessage]="errorMessage"
+    [loading]="loading"
+    class="data-container"
+    (reload)="getLogsList()">
+    <div class="pagination-content">
+      <app-logs-table [logsList]="logsList" />
+    </div>
+  </div>
+  <app-footer class="paginator-footer">
+    <mat-paginator
+      #paginator
+      class="demo-paginator"
+      (page)="handlePageEvent($event)"
+      [length]="length"
+      [pageSize]="pageSize"
+      [pageIndex]="pageIndex"
+      [pageSizeOptions]="[20, 30, 50]"
+      [showFirstLastButtons]="true"
+      aria-label="Select page">
+    </mat-paginator>
+  </app-footer>
+</div>

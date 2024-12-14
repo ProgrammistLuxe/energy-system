@@ -1,0 +1,92 @@
+.container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0 5px;
+  display: grid;
+  grid-template-rows: 40px fit-content(150px) auto;
+}
+
+.action-panel {
+  width: 100%;
+  height: 40px;
+  gap: 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.header {
+  margin: 0;
+}
+
+.scroll-container {
+  height: 100%;
+  width: 100%;
+}
+
+.passport-header {
+  overflow: auto;
+}
+
+.label {
+  align-items: center;
+  max-width: 275px;
+  margin-bottom: 0;
+}
+
+.table-data {
+  padding-top: 10px;
+  position: relative;
+  width: 100%;
+  height: calc(100% - 15px);
+  overflow: auto;
+}
+
+.tabs-list {
+  width: 100%;
+  margin-bottom: 15px;
+  overflow: auto;
+}
+
+.table {
+  width: 100%;
+  background-color: inherit;
+
+  th {
+    font-family: Inter, sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    color: var(--table-head-text);
+    background-color: var(--table-head-background);
+  }
+
+  td {
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    color: var(--text-color);
+    background-color: var(--bg);
+    height: 36px;
+  }
+
+  th.mat-mdc-header-cell,
+  td.mat-mdc-cell {
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  th,
+  td {
+    border-bottom: 1px solid var(--divider) !important;
+  }
+}
+
+.no-data {
+  color: var(--text-color);
+  margin-bottom: 0;
+}

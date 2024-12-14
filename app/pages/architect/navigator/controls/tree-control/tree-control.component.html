@@ -1,0 +1,53 @@
+<div
+  [attr.aria-labelledby]="_formField?.getLabelId()"
+  class="tree-controller-container"
+  [class.disabled]="disabled"
+  (document:keydown.escape)="menuTrigger.closeMenu()">
+  <div class="tree-controller-content-wrapper">
+    <div
+      #menuTrigger="matMenuTrigger"
+      [matMenuTriggerFor]="menu"
+      (menuOpened)="onMenuOpen()"
+      class="tree-controller-content">
+      @if(selectedCount) {
+      <div
+        [showAllProperties]="selectedNodes"
+        class="displayed-values">
+        @for(node of selectedNodes; track node; let isLast = $last) {
+        <div class="link-block">
+          <a
+            class="attr-link"
+            [routerLink]="['../../', node.uid]"
+            [relativeTo]="activatedRoute"
+            matTooltip="Перейти к редактору объекта"
+            (click)="$event.stopPropagation()"
+            >{{ node.value }}
+          </a>
+          @if(!isLast) {
+          <div>,</div>
+          }
+        </div>
+        }
+      </div>
+      }
+    </div>
+    <mat-menu
+      #menu="matMenu"
+      class="tree-controller-nav"
+      xPosition="after"
+      yPosition="above"
+      (click)="onContainerClick()"
+      (close)="onMenuClose()">
+      @if(focused) {
+      <div class="tree-controller-tree">
+        <app-tree [singleSelection]="singleSelection" />
+      </div>
+      }
+    </mat-menu>
+  </div>
+</div>
+<mat-icon
+  class="material-symbols-outlined"
+  [class.focused]="focused"
+  >arrow_drop_down</mat-icon
+>

@@ -1,0 +1,35 @@
+<div class="participants-container">
+  <app-action-panel>
+    <p>Участники</p>
+    <button
+      (click)="addParticipant()"
+      mat-flat-button>
+      Добавить участников
+    </button>
+  </app-action-panel>
+  <div
+    api-resolver
+    [loading]="loading"
+    [errorCode]="errorCode"
+    [errorMessage]="errorMessage"
+    (reload)="getParticipants()"
+    class="participants-list">
+    <div
+      *displayList="let participant of participantsList; empty: 'Участники не добавлены'"
+      class="participants-list-item">
+      <p class="participant-name">{{ participant.name }}</p>
+      <div class="actions-block">
+        <button
+          mat-icon-button
+          matIconButtonCustom
+          matTooltip="Удалить"
+          [width]="28"
+          [height]="28"
+          [iconsSize]="20"
+          (click)="deleteParticipant(participant)">
+          <mat-icon>delete_forever</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+:host {
+  display: block;
+  height: 100%;
+}
+.side-panel {
+  height: 100%;
+  position: relative;
+  padding: 16px 0;
+  background-color: var(--side-panel-bg);
+}

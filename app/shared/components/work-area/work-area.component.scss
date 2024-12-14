@@ -1,0 +1,9 @@
+.work-area {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  position: relative;
+  overflow: hidden;
+  grid-template-columns: 400px calc(100% - 400px);
+  grid-template-rows: 100%;
+}

@@ -1,0 +1,178 @@
+<div
+  class="work-space"
+  api-resolver
+  [errorCode]="errorCode"
+  [errorMessage]="errorMessage"
+  [loading]="loading"
+  (reload)="getData()">
+  <div class="search-field">
+    <div
+      appAddButton
+      matTooltip="Добавить класс"
+      (click)="addItem()"></div>
+    <app-search-field
+      (search)="searchData($event)"
+      [fieldsToSearch]="fieldsToSearch"></app-search-field>
+  </div>
+  <div class="table-container">
+    <ng-container *ngIf="dataSource.data?.length > 0; else listEmpty">
+      <ng-container>
+        <table
+          class="table"
+          mat-table
+          matSort
+          multiTemplateDataRows
+          (matSortChange)="dataSource.sort = sort"
+          [dataSource]="dataSource">
+          <ng-container matColumnDef="details">
+            <th
+              mat-header-cell
+              *matHeaderCellDef></th>
+            <td
+              mat-cell
+              *matCellDef="let element"
+              class="catalog-expand">
+              <button
+                mat-icon-button
+                [matTooltip]="element.id !== expandedElement?.id ? 'Подробно' : 'Свернуть'">
+                <mat-icon>
+                  {{ element.id !== expandedElement?.id ? 'chevron_right' : 'expand_more' }}
+                </mat-icon>
+              </button>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="class_name">
+            <th
+              *matHeaderCellDef
+              mat-header-cell
+              mat-sort-header>
+              Имя класса (англ.)
+            </th>
+            <td
+              *matCellDef="let element"
+              mat-cell>
+              {{ element.class_name | default }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="description">
+            <th
+              *matHeaderCellDef
+              mat-header-cell
+              mat-sort-header>
+              Смысловое определение основного класса
+            </th>
+            <td
+              *matCellDef="let element"
+              mat-cell>
+              {{ element.description | default }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="parent">
+            <th
+              *matHeaderCellDef
+              mat-header-cell
+              mat-sort-header>
+              Имя вышестоящего класса (англ.)
+            </th>
+            <td
+              class="parent"
+              matTooltip="Перейти к классу"
+              *matCellDef="let element"
+              (click)="scrollToRow(element.parent?.id); $event.stopPropagation()"
+              mat-cell>
+              {{ element.parent?.class_name | default }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="explanation">
+            <th
+              *matHeaderCellDef
+              mat-header-cell>
+              Комментарий
+            </th>
+            <td
+              *matCellDef="let element"
+              mat-cell
+              [overflowTooltip]="element.explanation || ''">
+              {{ element.explanation | default }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="is_library">
+            <th
+              *matHeaderCellDef
+              mat-sort-header
+              mat-header-cell>
+              Справочник
+            </th>
+            <td
+              *matCellDef="let element"
+              mat-cell>
+              {{ element.is_library ? 'Да' : ('Нет' | default) }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="actions">
+            <th
+              *matHeaderCellDef
+              mat-header-cell></th>
+            <td
+              *matCellDef="let element"
+              mat-cell>
+              <div class="actions-container">
+                <button
+                  mat-icon-button
+                  matIconButtonCustom
+                  [width]="30"
+                  [height]="30"
+                  [iconsSize]="20"
+                  matTooltip="Редактировать элемент"
+                  (click)="editItem(element); $event.stopPropagation()">
+                  <mat-icon> edit</mat-icon>
+                </button>
+                <button
+                  mat-icon-button
+                  matIconButtonCustom
+                  [width]="30"
+                  [height]="30"
+                  [iconsSize]="20"
+                  matTooltip="Удалить элемент"
+                  (click)="deleteItem(element); $event.stopPropagation()">
+                  <mat-icon> delete_forever</mat-icon>
+                </button>
+              </div>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="expandedDetail">
+            <td
+              [attr.colspan]="columns.length"
+              mat-cell
+              *matCellDef="let element">
+              @if(element.id === expandedElement?.id) {
+              <app-attrs-table [class_name]="element.class_name"></app-attrs-table>
+              }
+            </td>
+          </ng-container>
+          <tr
+            *matHeaderRowDef="columns; sticky: true"
+            mat-header-row
+            class="table-head"></tr>
+          <tr
+            mat-row
+            *matRowDef="let row; columns: columns"
+            (click)="expandedElement = expandedElement === row ? null : row"
+            [id]="row.id"
+            class="table-row"></tr>
+          <tr
+            mat-row
+            *matRowDef="let row; columns: ['expandedDetail']"
+            class="detail-row"></tr>
+        </table>
+      </ng-container>
+    </ng-container>
+    <ng-template #listEmpty>
+      <app-empty-template>
+        <p>Список пуст</p>
+      </app-empty-template>
+    </ng-template>
+  </div>
+</div>

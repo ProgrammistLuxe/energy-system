@@ -1,0 +1,71 @@
+<div
+  *ngIf="diffList.length"
+  class="diffs-table"
+  [class.expanded]="expanded">
+  <div class="header">
+    <h2 class="title">Активные diffы</h2>
+    <div>
+      <button
+        matIconButtonCustom
+        mat-button
+        [matTooltip]="expanded ? 'Закрыть панель' : 'Открыть панель'"
+        [width]="28"
+        [height]="28"
+        [iconsSize]="22"
+        (click)="expanded = !expanded">
+        <mat-icon class="material-symbols-outlined">{{
+          expanded ? 'keyboard_arrow_down' : 'keyboard_arrow_up'
+        }}</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="table-container">
+    <table
+      mat-table
+      [dataSource]="diffList"
+      class="table">
+      <ng-container matColumnDef="place_name">
+        <th
+          *matHeaderCellDef
+          mat-header-cell>
+          Место применения
+        </th>
+        <td
+          *matCellDef="let element"
+          mat-cell>
+          {{ element.place_name | default }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="diff_name">
+        <th
+          *matHeaderCellDef
+          mat-header-cell>
+          Название diff
+        </th>
+        <td
+          *matCellDef="let element"
+          mat-cell>
+          {{ element.diff_name | default }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="diff_id">
+        <th
+          *matHeaderCellDef
+          mat-header-cell>
+          Diff id
+        </th>
+        <td
+          *matCellDef="let element"
+          mat-cell>
+          {{ element.diff_id | default }}
+        </td>
+      </ng-container>
+      <tr
+        *matHeaderRowDef="columns; sticky: true"
+        mat-header-row></tr>
+      <tr
+        *matRowDef="let row; columns: columns"
+        mat-row></tr>
+    </table>
+  </div>
+</div>

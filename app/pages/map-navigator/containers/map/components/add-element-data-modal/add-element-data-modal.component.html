@@ -1,0 +1,54 @@
+<div class="add-name">
+  <div class="dialog-content-wrapper compact-form-field-area">
+    <mat-form-field
+      class="name"
+      appearance="outline">
+      <mat-label>Название</mat-label>
+      <input
+        [formControl]="nameControl"
+        maxlength="255"
+        matInput
+        type="text" />
+      <mat-error mat-error-ext></mat-error>
+    </mat-form-field>
+    @if(data.action !== 'LineSpan') {
+    <div [formGroup]="coordsForm">
+      <mat-form-field
+        class="name"
+        appearance="outline">
+        <mat-label>Широта</mat-label>
+        <input
+          formControlName="lat"
+          maxlength="255"
+          matInput
+          type="number" />
+        <mat-error mat-error-ext></mat-error>
+      </mat-form-field>
+      <mat-form-field
+        class="name"
+        appearance="outline">
+        <mat-label>Долгота</mat-label>
+        <input
+          formControlName="lng"
+          maxlength="255"
+          matInput
+          type="number" />
+        <mat-error mat-error-ext></mat-error>
+      </mat-form-field>
+    </div>
+    }
+    <div class="button-block">
+      <button
+        mat-flat-button
+        [disabled]="nameControl.invalid || (coordsForm.invalid && data.action !== 'LineSpan')"
+        (click)="addName()">
+        Добавить
+      </button>
+      <button
+        mat-flat-button
+        [mat-dialog-close]="false">
+        Отменить
+      </button>
+    </div>
+  </div>
+</div>

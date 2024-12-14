@@ -1,0 +1,179 @@
+<div
+  [appCheckScroll]
+  class="table-container">
+  @if(diffList.length) {
+  <table
+    mat-table
+    matSort
+    (matSortChange)="dataSource.sort = sort"
+    [dataSource]="dataSource"
+    class="table">
+    <ng-container
+      matColumnDef="id"
+      sticky>
+      <th
+        *matHeaderCellDef
+        mat-header-cell>
+        ID
+      </th>
+      <td
+        *matCellDef="let element"
+        mat-cell>
+        {{ element.id | default }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="object_name">
+      <th
+        *matHeaderCellDef
+        mat-header-cell>
+        Название diff
+      </th>
+      <td
+        *matCellDef="let element"
+        mat-cell>
+        <div [appCopyContent]="element.object_name">
+          <p
+            [overflowTooltip]="element.object_name"
+            class="text">
+            {{ element.object_name | default }}
+          </p>
+        </div>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="description">
+      <th
+        *matHeaderCellDef
+        mat-header-cell>
+        Описание diff
+      </th>
+      <td
+        *matCellDef="let element"
+        mat-cell>
+        <p
+          [overflowTooltip]="element.description"
+          class="text">
+          {{ element.description | default }}
+        </p>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="status">
+      <th
+        *matHeaderCellDef
+        mat-sort-header
+        mat-header-cell>
+        Статус
+      </th>
+      <td
+        *matCellDef="let element"
+        mat-cell>
+        {{ element.status | translateStatus | default }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="date_created">
+      <th
+        *matHeaderCellDef
+        mat-header-cell
+        mat-sort-header>
+        Дата создания
+      </th>
+      <td
+        *matCellDef="let element"
+        mat-cell>
+        {{ element.date_created | date: dateFormat | default }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="date_updated">
+      <th
+        *matHeaderCellDef
+        mat-header-cell
+        mat-sort-header>
+        Дата обновления
+      </th>
+      <td
+        *matCellDef="let element"
+        mat-cell>
+        {{ element.date_updated | date: dateFormat | default }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="timedelta">
+      <th
+        *matHeaderCellDef
+        mat-header-cell
+        mat-sort-header>
+        Время исполнения, сек.
+      </th>
+      <td
+        *matCellDef="let element"
+        mat-cell>
+        {{ element.timedelta | convertMicroseconds | number: '0.3' | default }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="size">
+      <th
+        *matHeaderCellDef
+        mat-header-cell
+        mat-sort-header>
+        Размер файла, кб
+      </th>
+      <td
+        *matCellDef="let element"
+        mat-cell>
+        {{ element.size | convertBytes | number: '0.3' | default }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="mem_size">
+      <th
+        *matHeaderCellDef
+        mat-header-cell
+        mat-sort-header>
+        Усредненный объем памяти при применении diff, мб
+      </th>
+      <td
+        *matCellDef="let element"
+        mat-cell>
+        {{ element.mem_size | convertBlocks | number: '0.3' | default }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="mem_peak">
+      <th
+        *matHeaderCellDef
+        mat-header-cell
+        mat-sort-header>
+        Максимальный объем памяти при применении diff, мб
+      </th>
+      <td
+        *matCellDef="let element"
+        mat-cell>
+        {{ element.mem_peak | convertBlocks | number: '0.3' | default }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="download">
+      <th *matHeaderCellDef></th>
+      <td
+        *matCellDef="let element"
+        mat-cell>
+        <mat-icon
+          class="material-symbols-outlined link"
+          matTooltip="Скачать diff"
+          (click)="downloadFromMinio(element.object_name)"
+          >download</mat-icon
+        >
+      </td>
+    </ng-container>
+    <tr
+      *matHeaderRowDef="columns; sticky: true"
+      mat-header-row></tr>
+    <tr
+      *matRowDef="let row; columns: columns"
+      mat-row
+      [class.error]="row.status === 'error'"
+      [class.waiting]="row.status === 'waiting'"></tr>
+  </table>
+  } @else {
+  <app-empty-template>
+    <mat-icon fontSize="material-icons-outlined">error_outlined</mat-icon>
+    <p>Не найдено ни одного diffs</p>
+  </app-empty-template>
+
+  }
+</div>

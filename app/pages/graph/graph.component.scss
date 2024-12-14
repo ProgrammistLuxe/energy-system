@@ -1,0 +1,16 @@
+.container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+.graph-wrapper {
+  position: absolute;
+  height: calc(100% - 56px);
+  width: 100%;
+  overflow: auto;
+}
+#container {
+  width: fit-content;
+  height: fit-content;
+  background-color: var(--color-black);
+}

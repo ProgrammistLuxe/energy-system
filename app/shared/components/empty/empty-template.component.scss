@@ -1,0 +1,28 @@
+.empty {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.empty-text {
+  text-align: center;
+  color: var(--empty-text-color);
+  margin: 0;
+  max-width: 300px;
+}
+.button-block {
+  margin-top: 15px;
+}
+:host ::ng-deep {
+  .icon-block {
+    .mat-icon {
+      width: 60px;
+      height: 60px;
+      font-size: 60px;
+      color: var(--empty-icon-color);
+    }
+    margin-bottom: 15px;
+  }
+}

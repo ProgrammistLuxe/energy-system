@@ -1,0 +1,60 @@
+<div class="menu-area">
+  <mat-accordion>
+    <ng-container *ngFor="let item of menuItems; let i = index">
+      <mat-expansion-panel
+        *ngIf="!item.routerLink && item.children.length; else singleLink"
+        [ngStyle]="{
+          maxHeight: panelMaxHeight,
+          height: getPanelHeight(item.children.length)
+        }"
+        [expanded]="item.isActive">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon class="icon">
+              {{ item.icon }}
+            </mat-icon>
+            {{ item.name }}
+          </mat-panel-title>
+          <mat-icon
+            class="dropdown-icon"
+            fontSet="material-symbols-outlined">
+            arrow_drop_down
+          </mat-icon>
+        </mat-expansion-panel-header>
+        <div class="sub-menu">
+          <a
+            *ngFor="let child of item.children"
+            class="submenu-item"
+            routerLink="{{ child.routerLink }}"
+            routerLinkActive
+            #rla="routerLinkActive"
+            (isActiveChange)="checkActiveState(i, child, $event)"
+            [class.active]="rla.isActive">
+            <div
+              class="active-indicator"
+              [class.active]="rla.isActive"></div>
+            <p class="text">{{ child.name }}</p>
+          </a>
+        </div>
+      </mat-expansion-panel>
+      <ng-template #singleLink>
+        <mat-expansion-panel class="panel-link">
+          <mat-expansion-panel-header>
+            <a
+              class="link"
+              routerLink="{{ item?.routerLink }}"
+              routerLinkActive
+              (isActiveChange)="toggleItemActiveState(item, $event)">
+              <mat-panel-title>
+                <mat-icon class="icon">
+                  {{ item.icon }}
+                </mat-icon>
+                {{ item.name }}
+              </mat-panel-title>
+            </a>
+          </mat-expansion-panel-header>
+        </mat-expansion-panel>
+      </ng-template>
+    </ng-container>
+  </mat-accordion>
+</div>

@@ -1,0 +1,18 @@
+$custom-gray-palette: (
+  50: #b4babd,
+  100: #748a99,
+  500: rgb(80, 80, 81),
+  700: #1c2024,
+  contrast: (
+    50: black,
+    100: black,
+    200: black,
+    300: black,
+    400: black,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  ),
+);

@@ -1,0 +1,106 @@
+<div
+  class="container"
+  api-resolver
+  [errorCode]="errorCode"
+  [errorMessage]="errorMessage"
+  [loading]="loading"
+  (reload)="loadAttrs()">
+  <div class="table-container">
+    @if(tableData.length) {
+    <ng-container>
+      <table
+        class="table"
+        mat-table
+        [dataSource]="tableData">
+        <ng-container matColumnDef="attr_name">
+          <th
+            *matHeaderCellDef
+            mat-header-cell
+            mat-sort-header>
+            Имя атрибута (англ.)
+          </th>
+          <td
+            *matCellDef="let element"
+            mat-cell>
+            <div class="attr-name-wrapper">
+              <p class="attr-name">{{ element.attr_name | default }}</p>
+
+              @if(element.inherited) {
+              <mat-icon
+                matTooltip="Атрибут является унаследованным"
+                class="inherit-icon material-symbols-outlined"
+                >family_history</mat-icon
+              >
+              }
+            </div>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="description">
+          <th
+            *matHeaderCellDef
+            mat-header-cell
+            mat-sort-header>
+            Смысловое назначение атрибута
+          </th>
+          <td
+            *matCellDef="let element"
+            mat-cell>
+            {{ element.description | default }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="type">
+          <th
+            *matHeaderCellDef
+            mat-header-cell>
+            Тип данных
+          </th>
+          <td
+            *matCellDef="let element"
+            mat-cell>
+            {{ element.type | default }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="class_name">
+          <th
+            *matHeaderCellDef
+            mat-header-cell>
+            Родительский класс
+          </th>
+          <td
+            *matCellDef="let element"
+            mat-cell>
+            {{ element.class_name | default }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="prefix_short">
+          <th
+            *matHeaderCellDef
+            mat-header-cell>
+            Префикс
+          </th>
+          <td
+            *matCellDef="let element"
+            mat-cell>
+            {{ element.prefix_short | default }}
+          </td>
+        </ng-container>
+
+        <tr
+          *matHeaderRowDef="columns; sticky: true"
+          mat-header-row
+          class="table-head"></tr>
+        <tr
+          *matRowDef="let row; columns: columns"
+          mat-row
+          class="table-row"></tr>
+      </table>
+    </ng-container>
+    } @else {
+    <app-empty-template>
+      <p class="empty-text">Атрибуты отсутствуют</p>
+    </app-empty-template>
+
+    }
+  </div>
+</div>

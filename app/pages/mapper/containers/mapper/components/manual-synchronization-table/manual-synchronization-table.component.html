@@ -1,0 +1,77 @@
+<app-action-panel>
+  <p>Ручное сопоставление</p>
+  <button
+    [disabled]="mappingTableData.length < 2 || saveLoading"
+    [buttonLoading]="saveLoading"
+    mat-flat-button
+    (click)="synchronize.emit()">
+    Соединить
+  </button>
+  <button
+    [disabled]="mappingTableData.length < 1 || saveLoading"
+    [buttonLoading]="saveLoading"
+    mat-button
+    (click)="desync.emit()">
+    Разъединить
+  </button>
+  <button
+    [disabled]="!mappingTableData.length"
+    mat-button
+    (click)="reset.emit()">
+    Очистить таблицу
+  </button>
+</app-action-panel>
+
+<div class="sync-objects-table">
+  @if (mappingTableData.length) {
+  <table
+    mat-table
+    multiTemplateDataRows
+    [dataSource]="mappingTableData"
+    class="table">
+    @for (groupColumn of groupDisplayedColumns; let i = $index; track groupColumn) {
+    <ng-container [matColumnDef]="groupColumn">
+      <th
+        class="group-header-cell"
+        [attr.colspan]="columnsToShow[groupColumn].length"
+        mat-header-cell
+        *matHeaderCellDef>
+        {{ groupColumn }}
+      </th>
+    </ng-container>
+    @for (column of columnsToShow[groupColumn]; let i = $index; track column) {
+    <ng-container [matColumnDef]="column">
+      <th
+        mat-header-cell
+        *matHeaderCellDef>
+        {{ column | getColumnName: groupColumn }}
+      </th>
+
+      <td
+        *matCellDef="let element"
+        mat-cell>
+        <div
+          [overflowTooltip]="element.data[groupColumn]?.[column]?.value"
+          class="cell-content">
+          {{ element.data[groupColumn]?.[column]?.value | default }}
+        </div>
+      </td>
+    </ng-container>
+    } }
+    <tr
+      mat-header-row
+      *matHeaderRowDef="groupDisplayedColumns; sticky: true"></tr>
+    <tr
+      *matHeaderRowDef="displayedColumns; sticky: true"
+      mat-header-row></tr>
+    <tr
+      *matRowDef="let row; columns: displayedColumns"
+      mat-row></tr>
+  </table>
+  } @else {
+  <app-empty-template>
+    <mat-icon fontSize="material-icons-outlined">info</mat-icon>
+    <p>Объекты не выбраны</p>
+  </app-empty-template>
+  }
+</div>

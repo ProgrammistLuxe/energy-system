@@ -1,0 +1,82 @@
+.container {
+  height: 100%;
+  width: 100%;
+}
+.passport-template-container {
+  position: relative;
+  height: calc(100% - 82px);
+  width: 100%;
+  padding: 25px 20px;
+}
+.template-name {
+  width: 350px;
+}
+.attr-button {
+  color: var(--light-blue) !important;
+}
+.divider {
+  width: 100%;
+  position: relative;
+  border-top-color: var(--color-black) !important;
+  margin: 10px 0 15px 0;
+}
+.add-attr {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+  color: var(--text-color-light) !important;
+  margin-bottom: 30px;
+}
+.attrs-form {
+  position: relative;
+  width: 700px;
+  height: calc(100% - 160px);
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+.label {
+  font-size: 14px;
+  color: var(--text-color);
+  margin-bottom: 3px;
+}
+.input-field {
+  padding-top: 27px;
+}
+.attr-group {
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+.select {
+  width: 400px;
+}
+.input {
+  width: 200px;
+}
+.delete-icon-button {
+  margin-top: 5px;
+}
+.delete-icon {
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+  color: var(--text-color);
+}
+.footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-left: 1px solid var(--color-black) !important;
+}
+.button-draft,
+.button-cancel {
+  width: 180px !important;
+}
+.button-draft:not(:disabled) {
+  border: 1px solid var(--light-blue-border);
+  color: var(--text-color-light-blue);
+}

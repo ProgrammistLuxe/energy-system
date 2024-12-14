@@ -1,0 +1,9 @@
+.mdc-tab-indicator__content--underline {
+  border-top: 3px solid var(--light-blue-bg) !important;
+}
+.mdc-tab__text-label {
+  color: var(--text-white) !important;
+}
+.mdc-tab__content {
+  pointer-events: inherit !important;
+}

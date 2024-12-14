@@ -1,0 +1,17 @@
+<div class="links-container">
+  <div class="dialog-content-wrapper">
+    @for(node of data.links; track node; let isLast = $last) {
+    <div class="link-block">
+      <a
+        class="attr-link"
+        matTooltip="Перейти к редактору объекта"
+        (click)="handleLinkClick($event, node)"
+        >{{ node.value }}</a
+      >
+      @if(!isLast) {
+      <span>,</span>
+      }
+    </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<div
+  api-resolver
+  [errorCode]="errorCode"
+  [errorMessage]="errorMessage"
+  [loading]="loading"
+  (reload)="loadGraph()">
+  @if(graphData.nodes) {
+  <div
+    class="graph-wrapper"
+    [class.loading]="childrenLoad">
+    <div
+      id="container"
+      [class.loading]="childrenLoad"></div>
+    <!-- <button
+      class="download-btn"
+      matTooltip="Скачать граф в png"
+      mat-icon-button
+      (click)="downloadPng()">
+      <mat-icon class="material-symbols-outlined">image</mat-icon>
+    </button> -->
+  </div>
+  } @else {
+  <app-empty-template>
+    <mat-icon
+      class="material-symbols-outlined"
+      fontSize="material-icons-outlined"
+      >info</mat-icon
+    >
+    <p>Выберите объект</p>
+  </app-empty-template>
+
+  }
+</div>

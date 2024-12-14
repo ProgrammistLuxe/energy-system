@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="auth-container">
+    <div class="logo">
+      <img
+        class="logo-img"
+        src="assets/images/logo.png"
+        alt="logo" />
+    </div>
+    <div class="auth-form compact-form-field-area">
+      <h2 class="title">Авторизируйтесь</h2>
+      <form
+        [formGroup]="form"
+        class="form">
+        <mat-form-field
+          appearance="outline"
+          class="login-form-field">
+          <mat-label>Логин</mat-label>
+          <input
+            formControlName="login"
+            matInput
+            autocomplete="username" />
+          <mat-error mat-error-ext></mat-error>
+        </mat-form-field>
+        <mat-form-field
+          appearance="outline"
+          class="login-form-field">
+          <mat-label>Пароль</mat-label>
+          <input
+            formControlName="password"
+            matInput
+            [type]="hide ? 'password' : 'text'"
+            autocomplete="current-password" />
+          <mat-icon
+            class="visibility-icon"
+            matSuffix
+            (click)="hide = !hide"
+            >{{ hide ? 'visibility' : 'visibility_off' }}</mat-icon
+          >
+          <mat-error mat-error-ext></mat-error>
+        </mat-form-field>
+      </form>
+      <div class="buttons">
+        <button
+          class="login-btn"
+          [buttonLoading]="loading"
+          (click)="login()"
+          mat-flat-button>
+          Войти
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

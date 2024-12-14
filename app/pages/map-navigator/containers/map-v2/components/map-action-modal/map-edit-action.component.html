@@ -1,0 +1,15 @@
+<div class="action-select compact-form-field-area">
+  <mat-form-field
+    appearance="outline"
+    subscriptSizing="dynamic"
+    class="select-action-field">
+    <mat-label> Выберите действие </mat-label>
+    <mat-select
+      value="Substation"
+      (valueChange)="actionChanged.emit($event)">
+      @for (mode of optionsList; track mode) {
+      <mat-option [value]="mode.value">{{ mode.name }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+</div>
